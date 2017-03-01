@@ -33,7 +33,7 @@ import {
 } from "react-prism";
 
 import Helmet from "react-helmet";
-
+import RightContainer from './topContainer'
 export default class Application extends Component {
 
   static propTypes = {
@@ -92,9 +92,7 @@ export default class Application extends Component {
               })}
             </div>
             <div className="col-xs-6">
-              <pre>
-                TODO
-              </pre>
+              <RightContainer  />
             </div>
           </div>
         </div>
