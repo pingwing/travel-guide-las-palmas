@@ -23,8 +23,8 @@ import {
 const GettingStartedGoogleMap = withGoogleMap(props => (
   <GoogleMap
     ref={props.onMapLoad}
-    defaultZoom={3}
-    defaultCenter={{ lat: -25.363882, lng: 131.044922 }}
+    defaultZoom={13}
+    defaultCenter={{ lat: 28.144107, lng: -15.431281 }}
     onClick={props.onMapClick}
   >
     {props.markers.map(marker => (
@@ -105,7 +105,7 @@ export default class GettingStartedExample extends Component {
         />
         <GettingStartedGoogleMap
           containerElement={
-            <div style={{ height: `100%` }} />
+            <div style={{ height: `80%` }} />
           }
           mapElement={
             <div style={{ height: `100%` }} />
