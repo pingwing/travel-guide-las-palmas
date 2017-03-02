@@ -9,8 +9,8 @@ export default class RightContainer extends Component {
   render() {
     return (
       <div className="content">
-<p>TEST sdjfakjwvdkhjfwf</p>
-        <AddMarker handleNewMarket={this.props.handleNewMarker}/>
+<p>ADD NEW LOCATION</p>
+        <AddMarker handleNewMarker={this.props.handleNewMarker}/>
         <LocationDetails>
           <InputComponent value={this.props.newMarketLat}/>
           <InputComponent value={this.props.newMarketLng}/>
