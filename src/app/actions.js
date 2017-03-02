@@ -5,10 +5,10 @@ export const editMarker = (text) => {
   };
 };
 
-export const addMarker = (newMarkers) => {
+export const addMarker = (position) => {
   return {
     type: 'ADD_MARKER',
-    newMarkers,
+    position,
   };
 };
 

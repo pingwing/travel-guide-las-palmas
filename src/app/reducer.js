@@ -8,15 +8,26 @@ const initialState = {
     key: `Taiwan`,
     defaultAnimation: 2,
   }],
+  currentMarker: '',
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_MARKER':
       console.log('PINGWIN: action', action);
+      const newMarker = {
+        position: action.position,
+        defaultAnimation: 2,
+        key: Date.now().toString(), // Add a key property for: http://fb.me/react-warning-keys
+      };
+      const nextMarkers = [
+        ...state.markers,
+        newMarker,
+      ];
       return {
         ...state,
-        markers: action.newMarkers,
+        markers: nextMarkers,
+        currentMarker: newMarker.key
       };
     case 'EDIT_MARKER':
       return {

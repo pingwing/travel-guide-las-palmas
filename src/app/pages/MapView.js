@@ -54,22 +54,15 @@ class MapView extends Component {
    * Go and try click now.
    */
   handleMapClick = (event) => {
-    const nextMarkers = [
-      ...this.props.markers,
-      {
-        position: event.latLng,
-        defaultAnimation: 2,
-        key: Date.now(), // Add a key property for: http://fb.me/react-warning-keys
-      },
-    ];
-    this.props.dispatch(addMarker(nextMarkers));
+    const position = event.latLng;
+    this.props.dispatch(addMarker(position));
 
-    if (nextMarkers.length === 3) {
-      this.props.toast(
-        `Right click on the marker to remove it`,
-        `Also check the code!`
-      );
-    }
+    // if (nextMarkers.length === 3) {
+    //   this.props.toast(
+    //     `Right click on the marker to remove it`,
+    //     `Also check the code!`
+    //   );
+    // }
   };
 
   handleMarkerRightClick = (targetMarker) => {
@@ -79,7 +72,7 @@ class MapView extends Component {
      * web front end and even with google maps API.)
      */
     const nextMarkers = this.props.markers.filter(marker => marker !== targetMarker);
-    this.props.dispatch(addMarker(nextMarkers));
+    //this.props.dispatch(addMarker(nextMarkers));
   };
 
   render() {
