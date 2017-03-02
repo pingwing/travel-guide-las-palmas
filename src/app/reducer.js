@@ -21,7 +21,7 @@ const reducer = (state = initialState, action) => {
       const newMarker = {
         position: action.position,
         defaultAnimation: 2,
-        key: Date.now().toString(), // Add a key property for: http://fb.me/react-warning-keys
+        key: Date.now().toString(),
         name: '',
         imageUrl: '',
         description: '',

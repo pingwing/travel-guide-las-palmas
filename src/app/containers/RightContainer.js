@@ -22,7 +22,8 @@ class RightContainer extends Component {
         <LocationDetails>
           <label>Lat:<InputComponent value={currentMarkerObject.position.lat()} /></label>
           <label>Lng:<InputComponent value={currentMarkerObject.position.lng()} /></label>
-          <Photo/>
+          <label>Name:<InputComponent value={currentMarkerObject.name} /></label>
+          <label>Image URL:<InputComponent value={currentMarkerObject.imageUrl} /></label>
         </LocationDetails>
       </div>
     )
