@@ -21,6 +21,10 @@ import {
   LinkContainer,
 } from "react-router-bootstrap";
 
+import {
+  GettingStartedExample,
+} from "../pages";
+
 import GitHubForkRibbon from "react-github-fork-ribbon";
 
 import {
@@ -76,9 +80,7 @@ export default class Application extends Component {
 
           <div className="row full-height">
             <div className="col" style={{height: `100%`, padding: '0', width: '100%', float: 'left'}}>
-              {React.cloneElement(Children.only(this.props.children), {
-                toast: this.handleToast,
-              })}
+              <GettingStartedExample toast={this.handleToast} />
             </div>
             <div style={{position: 'absolute',
               background: 'aqua',
