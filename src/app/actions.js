@@ -1,7 +1,14 @@
-export const editMarker = (text) => {
+export const editMarkerName = (name) => {
   return {
-    type: 'EDIT_MARKER',
-    text,
+    type: 'EDIT_MARKER_NAME',
+    name,
+  };
+};
+
+export const editMarkerImageUrl = (imageUrl) => {
+  return {
+    type: 'EDIT_MARKER_IMAGE_URL',
+    imageUrl,
   };
 };
 
@@ -12,9 +19,9 @@ export const addMarker = (position) => {
   };
 };
 
-export const deleteMarker = (text) => {
+export const deleteMarker = (key) => {
   return {
     type: 'DELETE_MARKER',
-    text,
+    key,
   };
 }

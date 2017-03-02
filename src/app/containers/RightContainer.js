@@ -5,8 +5,21 @@ import LocationDetails from './LocationDetails';
 import Photo from './Photo';
 import AddMarker from './AddMarker';
 import {connect} from 'react-redux';
+import {
+  editMarkerName,
+  editMarkerImageUrl
+} from '../actions';
 
 class RightContainer extends Component {
+
+  editMarkerName = (evt) => {
+      this.props.dispatch(editMarkerName(evt.target.value));
+  }
+
+  editMarkerImageUrl = (evt) => {
+      this.props.dispatch(editMarkerImageUrl(evt.target.value));
+  }  
+
   render() {
     console.log('RightContainer props',this.props);
     let currentMarkerObject;
@@ -22,8 +35,8 @@ class RightContainer extends Component {
         <LocationDetails>
           <label>Lat:<InputComponent value={currentMarkerObject.position.lat()} /></label>
           <label>Lng:<InputComponent value={currentMarkerObject.position.lng()} /></label>
-          <label>Name:<InputComponent value={currentMarkerObject.name} /></label>
-          <label>Image URL:<InputComponent value={currentMarkerObject.imageUrl} /></label>
+          <label>Name:<InputComponent value={currentMarkerObject.name} onChange={this.editMarkerName} /></label>
+          <label>Image URL:<InputComponent value={currentMarkerObject.imageUrl} onChange={this.editMarkerImageUrl} /></label>
         </LocationDetails>
       </div>
     )
