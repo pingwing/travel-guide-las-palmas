@@ -75,12 +75,16 @@ export default class Application extends Component {
         <div className="container-fluid full-height" style={{height: "56.4%",}}>
 
           <div className="row full-height">
-            <div className="col" style={{height: `100%`, padding: '0', width: '80%', float: 'left'}}>
+            <div className="col" style={{height: `100%`, padding: '0', width: '100%', float: 'left'}}>
               {React.cloneElement(Children.only(this.props.children), {
                 toast: this.handleToast,
               })}
             </div>
-            <div className="col">
+            <div style={{position: 'absolute',
+              background: 'aqua',
+              height: '100%',
+              width: '200px',
+              right: '0px',}}>
               <RightContainer />
             </div>
           </div>
