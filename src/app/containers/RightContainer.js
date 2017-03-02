@@ -1,29 +1,21 @@
 import React from 'react';
 import {Component} from 'react';
-import PossitionDetails from './PossitionDetails';
 import InputComponent from './InputComponent';
 import LocationDetails from './LocationDetails';
 import Photo from './Photo';
-import SubmitButton from './SubmitButton';
+import AddMarker from './AddMarker';
 
 export default class RightContainer extends Component {
   render() {
-    return(
+    return (
       <div className="content">
-        <PossitionDetails>
-          <InputComponent/>
-          <InputComponent/>
-          <SubmitButton/>
-        </PossitionDetails>
-
+        <AddMarker handleNewMarket={this.props.handleNewMarker}/>
         <LocationDetails>
-          <InputComponent/>
-          <InputComponent/>
+          <InputComponent value={this.props.newMarketLat}/>
+          <InputComponent value={this.props.newMarketLng}/>
           <Photo/>
         </LocationDetails>
-
       </div>
     )
   }
-
 }
