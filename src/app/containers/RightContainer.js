@@ -10,7 +10,7 @@ export default class RightContainer extends Component {
     return (
       <div className="content">
 <p>ADD NEW LOCATION</p>
-        <AddMarker handleNewMarker={this.props.handleNewMarker}/>
+        {/*<AddMarker handleNewMarker={this.props.handleNewMarker}/>*/}
         <LocationDetails>
           <InputComponent value={this.props.newMarketLat}/>
           <InputComponent value={this.props.newMarketLng}/>
