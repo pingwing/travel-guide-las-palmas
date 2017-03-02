@@ -5,7 +5,7 @@ export default class LocationDetails extends Component {
   render() {
     return (
       <div className="locationDetails">
-
+        {this.props.children}
       </div>
     )
 

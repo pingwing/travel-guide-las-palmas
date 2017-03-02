@@ -14,6 +14,11 @@ import {
   Marker,
 } from "../../lib";
 
+import {connect} from 'react-redux';
+import {
+  addMarker,
+} from '../actions';
+
 /*
  * This is the modify version of:
  * https://developers.google.com/maps/documentation/javascript/examples/event-arguments
@@ -24,7 +29,7 @@ const GettingStartedGoogleMap = withGoogleMap(props => (
   <GoogleMap
     ref={props.onMapLoad}
     defaultZoom={13}
-    defaultCenter={{ lat: 28.114107, lng: -15.431281 }}
+    defaultCenter={{lat: 28.114107, lng: -15.431281}}
     onClick={props.onMapClick}
   >
     {props.markers.map(marker => (
@@ -36,66 +41,39 @@ const GettingStartedGoogleMap = withGoogleMap(props => (
   </GoogleMap>
 ));
 
-export default class MapView extends Component {
-
-  state = {
-    markers: [{
-      position: {
-        lat: 25.0112183,
-        lng: 121.52067570000001,
-      },
-      key: `Taiwan`,
-      defaultAnimation: 2,
-    }],
-  };
-
-  handleMapLoad = this.handleMapLoad.bind(this);
-  handleMapClick = this.handleMapClick.bind(this);
-  handleMarkerRightClick = this.handleMarkerRightClick.bind(this);
-
-  handleMapLoad(map) {
+class MapView extends Component {
+  handleMapLoad = (map) => {
     this._mapComponent = map;
     if (map) {
-      console.log(map.getZoom());
+      console.log('ZOOM LEVEL:', map.getZoom());
     }
-  }
+  };
 
   /*
    * This is called when you click on the map.
    * Go and try click now.
    */
-  handleMapClick(event) {
-    const nextMarkers = [
-      ...this.state.markers,
-      {
-        position: event.latLng,
-        defaultAnimation: 2,
-        key: Date.now(), // Add a key property for: http://fb.me/react-warning-keys
-      },
-    ];
-    this.setState({
-      markers: nextMarkers,
-    });
+  handleMapClick = (event) => {
+    const position = event.latLng;
+    this.props.dispatch(addMarker(position));
 
-    if (nextMarkers.length === 3) {
-      this.props.toast(
-        `Right click on the marker to remove it`,
-        `Also check the code!`
-      );
-    }
-  }
+    // if (nextMarkers.length === 3) {
+    //   this.props.toast(
+    //     `Right click on the marker to remove it`,
+    //     `Also check the code!`
+    //   );
+    // }
+  };
 
-  handleMarkerRightClick(targetMarker) {
+  handleMarkerRightClick = (targetMarker) => {
     /*
      * All you modify is data, and the view is driven by data.
      * This is so called data-driven-development. (And yes, it's now in
      * web front end and even with google maps API.)
      */
-    const nextMarkers = this.state.markers.filter(marker => marker !== targetMarker);
-    this.setState({
-      markers: nextMarkers,
-    });
-  }
+    const nextMarkers = this.props.markers.filter(marker => marker !== targetMarker);
+    //this.props.dispatch(addMarker(nextMarkers));
+  };
 
   render() {
     return (
@@ -105,17 +83,25 @@ export default class MapView extends Component {
         />
         <GettingStartedGoogleMap
           containerElement={
-            <div style={{ height: `100%` }}/>
+            <div style={{height: `100%`}}/>
           }
           mapElement={
-            <div style={{ height: `100%` }} />
+            <div style={{height: `100%`}}/>
           }
           onMapLoad={this.handleMapLoad}
           onMapClick={this.handleMapClick}
-          markers={this.state.markers}
+          markers={this.props.markers}
           onMarkerRightClick={this.handleMarkerRightClick}
         />
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    markers: state.markers,
+  };
+};
+
+export default connect(mapStateToProps)(MapView);

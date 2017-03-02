@@ -42,10 +42,6 @@ import Photo from './Photo';
 import PhotoSlider from './PhotoSlider';
 export default class Application extends Component {
 
-  static propTypes = {
-    children: PropTypes.element.isRequired,
-  };
-
   handleToast = this.handleToast.bind(this);
 
   handleToast(title, message) {
