@@ -1,8 +1,12 @@
 import React from 'react';
-import {Component} from 'react';
+import {Component, PropTypes} from 'react';
 import PossitionDetails from './PossitionDetails';
 import InputComponent from './InputComponent';
 import SubmitButton from './SubmitButton';
+
+const propTypes = {
+  handleNewMarker: PropTypes.func.isRequired
+}
 
 export default class AddMarker extends Component {
   render() {
@@ -19,3 +23,5 @@ export default class AddMarker extends Component {
     )
   }
 }
+
+AddMarker.propTypes = propTypes
