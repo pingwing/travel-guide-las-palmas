@@ -10,6 +10,7 @@ export default class RightContainer extends Component {
   render() {
     return(
       <div className="content">
+        <p>TEST sdjfakjwvdkhjfwf</p>
         <PossitionDetails>
           <InputComponent/>
           <InputComponent/>

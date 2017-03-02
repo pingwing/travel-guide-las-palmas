@@ -75,14 +75,17 @@ export default class Application extends Component {
         <div className="container-fluid full-height">
 
           <div className="row full-height">
-            <div className="col-md-12" style={{ height: `100%`, padding: '0' }}>
+            <div className="col" style={{ height: `100%`, padding: '0', width: '80%', float: 'left' }}>
               {React.cloneElement(Children.only(this.props.children), {
                 toast: this.handleToast,
               })}
             </div>
-            <div >
-              <RightContainer  />
+            <div className="col">
+              <RightContainer />
             </div>
+          </div>
+          <div className="row row-md-1">
+
           </div>
         </div>
       </div>
