@@ -37,8 +37,9 @@ import {
 } from "react-prism";
 
 import Helmet from "react-helmet";
-import RightContainer from './RightContainer'
-
+import RightContainer from './RightContainer';
+import Photo from './Photo';
+import PhotoSlider from './PhotoSlider';
 export default class Application extends Component {
 
   handleToast = this.handleToast.bind(this);
@@ -88,9 +89,10 @@ export default class Application extends Component {
             </div>
           </div>
         </div>
-        <div className="navbar navbar-default navbar-fixed-bottom" style={{height: "40%",}}>
-          <div className="container" style={{}}>
-            hdfliajdfkjwefkjsd
+        <div className="navbar navbar-default navbar-fixed-bottom" style={{height: "40%", margin:'auto'}}>
+          <PhotoSlider />
+          <div className="container-bottom pull-left ">
+          <Photo/>
           </div>
         </div>
       </div>
