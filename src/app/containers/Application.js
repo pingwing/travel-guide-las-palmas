@@ -22,7 +22,7 @@ import {
 } from "react-router-bootstrap";
 
 import {
-  GettingStartedExample,
+  MapView,
 } from "../pages";
 
 import GitHubForkRibbon from "react-github-fork-ribbon";
@@ -80,7 +80,7 @@ export default class Application extends Component {
 
           <div className="row full-height">
             <div className="col" style={{height: `100%`, padding: '0', width: '100%', float: 'left'}}>
-              <GettingStartedExample toast={this.handleToast} />
+              <MapView toast={this.handleToast} />
             </div>
             <div style={{position: 'absolute',
               background: 'aqua',

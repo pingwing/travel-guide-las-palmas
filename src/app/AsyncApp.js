@@ -4,7 +4,7 @@ import {
 } from "react";
 
 import {
-  AsyncGettingStartedExample,
+  AsyncMapView,
 } from "./pages/async";
 
 export default class AsyncApp extends Component {
@@ -17,7 +17,7 @@ export default class AsyncApp extends Component {
 
   render() {
     return (
-      <AsyncGettingStartedExample
+      <AsyncMapView
         toast={this.handleToast}
       />
     );

@@ -36,7 +36,7 @@ const GettingStartedGoogleMap = withGoogleMap(props => (
   </GoogleMap>
 ));
 
-export default class GettingStartedExample extends Component {
+export default class MapView extends Component {
 
   state = {
     markers: [{

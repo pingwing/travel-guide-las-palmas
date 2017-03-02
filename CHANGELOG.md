@@ -408,8 +408,8 @@ After:
 // Wrap all `react-google-maps` components with `withGoogleMap` HOC
 // then wraps it into `withScriptjs` HOC
 // It loads Google Maps JavaScript API v3 for you asynchronously.
-// Name the component AsyncGettingStartedExampleGoogleMap
-const AsyncGettingStartedExampleGoogleMap = withScriptjs(
+// Name the component AsyncMapViewGoogleMap
+const AsyncMapViewGoogleMap = withScriptjs(
   withGoogleMap(
     props => (
     <GoogleMap

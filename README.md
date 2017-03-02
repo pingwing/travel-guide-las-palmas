@@ -190,8 +190,8 @@ import withScriptjs from "react-google-maps/lib/async/withScriptjs";
 // Wrap all `react-google-maps` components with `withGoogleMap` HOC
 // then wraps it into `withScriptjs` HOC
 // It loads Google Maps JavaScript API v3 for you asynchronously.
-// Name the component AsyncGettingStartedExampleGoogleMap
-const AsyncGettingStartedExampleGoogleMap = withScriptjs(
+// Name the component AsyncMapViewGoogleMap
+const AsyncMapViewGoogleMap = withScriptjs(
   withGoogleMap(
     props => (
     <GoogleMap
@@ -211,7 +211,7 @@ const AsyncGettingStartedExampleGoogleMap = withScriptjs(
 );
 // Then, render it:
 render(
-  <AsyncGettingStartedExampleGoogleMap
+  <AsyncMapViewGoogleMap
     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp"
     loadingElement={
       <div style={{ height: `100%` }}>

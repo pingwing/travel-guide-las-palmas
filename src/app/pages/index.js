@@ -1,7 +1,7 @@
-import GettingStartedExample from "./GettingStartedExample";
+import MapView from "./MapView";
 
-GettingStartedExample.__raw = require(`!raw!./GettingStartedExample`);
+MapView.__raw = require(`!raw!./MapView`);
 
 export {
-  GettingStartedExample,
+  MapView,
 };

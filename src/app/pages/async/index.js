@@ -1,10 +1,10 @@
-import AsyncGettingStartedExample from "./AsyncGettingStartedExample";
+import AsyncMapView from "./AsyncMapView";
 
 import PageWithIframeEntry from "./PageWithIframeEntry";
 
-PageWithIframeEntry.__raw = require(`!raw!./AsyncGettingStartedExample`);
+PageWithIframeEntry.__raw = require(`!raw!./AsyncMapView`);
 
 export {
-  AsyncGettingStartedExample,
+  AsyncMapView,
   PageWithIframeEntry,
 };

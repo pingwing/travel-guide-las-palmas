@@ -22,7 +22,7 @@ import {
  *
  * Loaded using async loader.
  */
-const AsyncGettingStartedExampleGoogleMap = _.flowRight(
+const AsyncMapViewGoogleMap = _.flowRight(
   withScriptjs,
   withGoogleMap,
 )(props => (
@@ -41,7 +41,7 @@ const AsyncGettingStartedExampleGoogleMap = _.flowRight(
   </GoogleMap>
 ));
 
-export default class AsyncGettingStartedExample extends Component {
+export default class AsyncMapView extends Component {
 
   static propTypes = {
     toast: PropTypes.func.isRequired,
@@ -108,7 +108,7 @@ export default class AsyncGettingStartedExample extends Component {
 
   render() {
     return (
-      <AsyncGettingStartedExampleGoogleMap
+      <AsyncMapViewGoogleMap
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg"
         loadingElement={
           <div style={{ height: `100%` }}>
