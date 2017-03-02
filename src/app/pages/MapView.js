@@ -76,6 +76,7 @@ class MapView extends Component {
   };
 
   render() {
+console.log(this.props.markers);
     return (
       <div style={{height: `100%`}}>
         <Helmet

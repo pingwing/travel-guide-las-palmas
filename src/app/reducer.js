@@ -35,13 +35,17 @@ const reducer = (state = initialState, action) => {
         markers: nextMarkers,
         currentMarker: newMarker.key
       };
-    case 'EDIT_MARKER':
+    case 'EDIT_MARKER_NAME':
+      const editedMarkers = state.markers.map((marker) => {
+        const markerToReturn = marker;
+          if (marker.key === state.currentMarker) {
+            markerToReturn.name = action.name;
+          }
+          return markerToReturn;
+      });
       return {
-        items: state.items.concat([{
-          text: state.inputValue,
-          checked: false,
-        }]),
-        inputValue: '',
+        ...state,
+        markers: editedMarkers,
       };
     case 'DELETE_MARKER':
       return {
