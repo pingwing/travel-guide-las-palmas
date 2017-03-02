@@ -24,4 +24,4 @@ export default class AddMarker extends Component {
   }
 }
 
-AddMarker.propTypes = propTypes
+// AddMarker.propTypes = propTypes

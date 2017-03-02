@@ -38,11 +38,8 @@ import {
 
 import Helmet from "react-helmet";
 import RightContainer from './RightContainer'
-export default class Application extends Component {
 
-  static propTypes = {
-    children: PropTypes.element.isRequired,
-  };
+export default class Application extends Component {
 
   handleToast = this.handleToast.bind(this);
 
