@@ -61,7 +61,7 @@ export default class Application extends Component {
             { property: `og:type`, content: `article` },
           ]}
         />
-        <Navbar fluid>
+        <Navbar fluid style={{ margin: '0' }}>
           <Navbar.Header>
             <Navbar.Brand>
               <Link to="/">Travel Guide Las Palmas</Link>
@@ -74,24 +74,14 @@ export default class Application extends Component {
           </Nav>
         </Navbar>
         <div className="container-fluid full-height">
-          <GitHubForkRibbon
-            position="right"
-            color="black"
-            href="https://github.com/pingwing/travel-guide-las-palmas"
-          >
-            Fork me on GitHub
-          </GitHubForkRibbon>
-          <ToastContainer
-            ref="toast"
-            toastMessageFactory={React.createFactory(ToastMessage.animation)}
-          />
+
           <div className="row full-height">
-            <div className="col-xs-6" style={{ height: `100%` }}>
+            <div className="col-md-12" style={{ height: `100%`, padding: '0' }}>
               {React.cloneElement(Children.only(this.props.children), {
                 toast: this.handleToast,
               })}
             </div>
-            <div className="col-xs-6">
+            <div >
               <RightContainer  />
             </div>
           </div>

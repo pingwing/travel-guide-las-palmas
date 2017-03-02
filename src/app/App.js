@@ -65,27 +65,27 @@ export default class App extends Component {
     return (
       <Router history={history}>
         <Route path="/" component={Application}>
-          <IndexRoute component={GettingStartedExample} />
+          <IndexRoute component={GettingStartedExample}/>
           <Route path="basics">
-            <Route path="pop-up-window" component={PopUpInfoWindowExample} />
+            <Route path="pop-up-window" component={PopUpInfoWindowExample}/>
           </Route>
           <Route path="events">
-            <Route path="simple-click-event" component={SimpleClickEventExample} />
-            <Route path="closure-listeners" component={ClosureListenersExample} />
-            <Route path="accessing-arguments" component={AccessingArgumentsExample} />
-            <Route path="getting-properties" component={GettingPropertiesExample} />
+            <Route path="simple-click-event" component={SimpleClickEventExample}/>
+            <Route path="closure-listeners" component={ClosureListenersExample}/>
+            <Route path="accessing-arguments" component={AccessingArgumentsExample}/>
+            <Route path="getting-properties" component={GettingPropertiesExample}/>
           </Route>
           <Route path="drawing">
-            <Route path="drawing-tools" component={DrawingExample} />
+            <Route path="drawing-tools" component={DrawingExample}/>
           </Route>
           <Route path="places">
-            <Route path="search-box" component={SearchBoxExample} />
+            <Route path="search-box" component={SearchBoxExample}/>
           </Route>
           <Route path="addons">
-            <Route path="marker-clusterer" component={MarkerClustererExample} />
+            <Route path="marker-clusterer" component={MarkerClustererExample}/>
           </Route>
-          <Route path="async" component={PageWithIframeEntry} />
-          <Redirect path="*" to="/" />
+          <Route path="async" component={PageWithIframeEntry}/>
+          <Redirect path="*" to="/"/>
         </Route>
       </Router>
     );
