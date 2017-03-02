@@ -55,12 +55,12 @@ export default class Application extends Component {
       <div className="full-height">
         <Helmet
           meta={[
-            { name: `viewport`, content: `width=device-width, initial-scale=1` },
-            { name: `description`, content: `react-google-maps example application` },
-            { property: `og:type`, content: `article` },
+            {name: `viewport`, content: `width=device-width, initial-scale=1`},
+            {name: `description`, content: `react-google-maps example application`},
+            {property: `og:type`, content: `article`},
           ]}
         />
-        <Navbar fluid style={{ margin: '0' }}>
+        <Navbar fluid style={{margin: '0'}}>
           <Navbar.Header>
             <Navbar.Brand>
               <Link to="/">Travel Guide Las Palmas</Link>
@@ -72,10 +72,10 @@ export default class Application extends Component {
             </NavDropdown>
           </Nav>
         </Navbar>
-        <div className="container-fluid full-height">
+        <div className="container-fluid full-height" style={{height: "56.4%",}}>
 
           <div className="row full-height">
-            <div className="col" style={{ height: `100%`, padding: '0', width: '80%', float: 'left' }}>
+            <div className="col" style={{height: `100%`, padding: '0', width: '80%', float: 'left'}}>
               {React.cloneElement(Children.only(this.props.children), {
                 toast: this.handleToast,
               })}
@@ -84,8 +84,10 @@ export default class Application extends Component {
               <RightContainer />
             </div>
           </div>
-          <div className="row row-md-1">
-
+        </div>
+        <div className="navbar navbar-default navbar-fixed-bottom" style={{height: "40%",}}>
+          <div className="container" style={{}}>
+            hdfliajdfkjwefkjsd
           </div>
         </div>
       </div>
