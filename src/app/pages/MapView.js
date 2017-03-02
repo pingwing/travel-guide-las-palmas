@@ -17,6 +17,7 @@ import {
 import {connect} from 'react-redux';
 import {
   addMarker,
+  selectMarker,
 } from '../actions';
 
 /*
@@ -71,8 +72,7 @@ class MapView extends Component {
      * This is so called data-driven-development. (And yes, it's now in
      * web front end and even with google maps API.)
      */
-    const nextMarkers = this.props.markers.filter(marker => marker !== targetMarker);
-    //this.props.dispatch(addMarker(nextMarkers));
+    this.props.dispatch(selectMarker(targetMarker.key));
   };
 
   render() {

@@ -19,6 +19,13 @@ export const addMarker = (position) => {
   };
 };
 
+export const selectMarker = (key) => {
+  return {
+    type: 'SELECT_MARKER',
+    key,
+  };
+};
+
 export const deleteMarker = (key) => {
   return {
     type: 'DELETE_MARKER',

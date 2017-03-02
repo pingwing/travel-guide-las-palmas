@@ -47,6 +47,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         markers: editedMarkers,
       };
+    case 'SELECT_MARKER':
+      return {
+        ...state,
+        currentMarker: action.key,
+      };
     case 'DELETE_MARKER':
       return {
         ...state,
