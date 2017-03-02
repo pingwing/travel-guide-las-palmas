@@ -4,9 +4,9 @@ import {Component} from 'react';
 export default class PossitionDetails extends Component {
   render() {
     return (
-      <label>
+      <div className="possitionDetails">
 
-      </label>
+      </div>
     )
   }
 }

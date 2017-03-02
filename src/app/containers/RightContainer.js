@@ -1,10 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import PossitionDetails from './PossitionDetails';
-import CurrentLatitude from './CurrentLatitude';
-import CurrentLongitude from './CurrentLongitude';
-import Latitude from './Latitude';
-import Longitude from './Longitude';
+import InputComponent from './InputComponent';
 import LocationDetails from './LocationDetails';
 import Photo from './Photo';
 import SubmitButton from './SubmitButton';
@@ -12,16 +9,16 @@ import SubmitButton from './SubmitButton';
 export default class RightContainer extends Component {
   render() {
     return(
-      <div>
+      <div className="content">
         <PossitionDetails>
-          <CurrentLatitude/>
-          <CurrentLongitude/>
+          <InputComponent/>
+          <InputComponent/>
           <SubmitButton/>
         </PossitionDetails>
 
         <LocationDetails>
-          <Latitude/>
-          <Longitude/>
+          <InputComponent/>
+          <InputComponent/>
           <Photo/>
         </LocationDetails>
 
