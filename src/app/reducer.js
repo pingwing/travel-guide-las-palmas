@@ -7,6 +7,9 @@ const initialState = {
     },
     key: `Taiwan`,
     defaultAnimation: 2,
+    name: '',
+    imageUrl: '',
+    description: '',
   }],
   currentMarker: '',
 };
@@ -19,6 +22,9 @@ const reducer = (state = initialState, action) => {
         position: action.position,
         defaultAnimation: 2,
         key: Date.now().toString(), // Add a key property for: http://fb.me/react-warning-keys
+        name: '',
+        imageUrl: '',
+        description: '',
       };
       const nextMarkers = [
         ...state.markers,
