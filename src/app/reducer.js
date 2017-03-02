@@ -52,6 +52,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         currentMarker: action.key,
       };
+    case 'EDIT_MARKER_IMAGE_URL':
+      const editedMarkersUrl = state.markers.map((marker) => {
+        const markerToReturn = marker;
+          if (marker.key === state.currentMarker) {
+            markerToReturn.imageUrl = action.imageUrl;
+          }
+          return markerToReturn;
+      });
+      return {
+        ...state,
+        markers: editedMarkersUrl,
+      };      
     case 'DELETE_MARKER':
       return {
         ...state,
