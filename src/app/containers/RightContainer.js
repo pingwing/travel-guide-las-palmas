@@ -7,6 +7,7 @@ import Latitude from './Latitude';
 import Longitude from './Longitude';
 import LocationDetails from './LocationDetails';
 import Photo from './Photo';
+import SubmitButton from './SubmitButton';
 
 export default class RightContainer extends Component {
   render() {

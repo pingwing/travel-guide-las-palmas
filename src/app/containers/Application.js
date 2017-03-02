@@ -33,7 +33,7 @@ import {
 } from "react-prism";
 
 import Helmet from "react-helmet";
-import RightContainer from './topContainer'
+import RightContainer from './RightContainer'
 export default class Application extends Component {
 
   static propTypes = {
