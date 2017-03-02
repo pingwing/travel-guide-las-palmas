@@ -54,7 +54,6 @@ export default class Application extends Component {
     return (
       <div className="full-height">
         <Helmet
-          titleTemplate="%s | Travel Guide Las Palmas | React in Flip Flops"
           meta={[
             { name: `viewport`, content: `width=device-width, initial-scale=1` },
             { name: `description`, content: `react-google-maps example application` },

@@ -101,7 +101,7 @@ export default class GettingStartedExample extends Component {
     return (
       <div style={{height: `100%`}}>
         <Helmet
-          title="Getting Started"
+          title="Travel Guide Las Palmas | React in Flip Flops"
         />
         <GettingStartedGoogleMap
           containerElement={
