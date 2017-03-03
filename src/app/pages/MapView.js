@@ -41,28 +41,35 @@ const geolocation = (
  *
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
-const GoogleMapsComponent = withGoogleMap(props => (
+
+const GoogleMapsComponent = withGoogleMap(props => {
+
+  const circle = <Circle radius={1000} center={props.center}/>;
+  const marker = <Marker
+    position={props.center}
+  />;
+  //circle.bindTo('center', marker, 'position');
+
+  return (
   <GoogleMap
     ref={props.onMapLoad}
     defaultZoom={13}
     center={props.center}
     onClick={props.onMapClick}
   >
-    <Circle center={{lat: 28.114107, lng: -15.431281}} radius={1000}/>
+    {marker}
+    {circle}
+
     {props.markers.map(marker => {
-
-
       return (
-        <span>
         <Marker
           {...marker}
           onClick={() => props.onMarkerClick(marker)}
         />
-        </span>
       )
     })}
   </GoogleMap>
-));
+)});
 
 class MapView extends Component {
   state = {
@@ -102,12 +109,13 @@ class MapView extends Component {
      */
     this.props.dispatch(selectMarker(targetMarker.key));
   };
+
   componentDidMount() {
     const tick = () => {
       if (this.isUnmounted) {
         return;
       }
-      this.setState({ radius: Math.max(this.state.radius - 20, 0) });
+      this.setState({radius: Math.max(this.state.radius - 20, 0)});
 
       if (this.state.radius > 200) {
         raf(tick);
@@ -136,6 +144,7 @@ class MapView extends Component {
       });
     });
   }
+
   render() {
     console.log(this.props.markers);
     return (
