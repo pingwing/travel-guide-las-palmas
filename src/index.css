@@ -31,6 +31,10 @@ input.modalInput {
   border-radius: 5px;
 }
 
+input.support {
+  margin: 5px;
+}
+
 button {
   margin: 10px;
 }

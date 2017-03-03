@@ -39,6 +39,7 @@ import {
 import Helmet from "react-helmet";
 import RightContainer from './RightContainer';
 import PhotoSlider from './PhotoSlider';
+import Support from './Support';
 export default class Application extends Component {
 
   handleToast = this.handleToast.bind(this);
@@ -70,6 +71,7 @@ export default class Application extends Component {
           <Nav>
             <NavDropdown id="examples-dropdown" title="Options">
               <LinkContainer to="/basics/pop-up-window"><MenuItem>Insert new place</MenuItem></LinkContainer>
+              <LinkContainer to="/basics/pop-up-window"><Support/></LinkContainer>
             </NavDropdown>
           </Nav>
         </Navbar>
