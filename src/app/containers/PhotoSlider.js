@@ -19,16 +19,19 @@ class PhotoSlider extends Component {
     console.log('PINGWIN: this.props', this.props);
     return (
       <div>
-        <ul className='pagination photoSlider' style={{height: '10%', display: 'inline'}}>
-          <li><a href="#">«</a></li>
-          {this.props.markers.map((marker) => {
-            return <li><a href="#"><MiniPhoto imageUrl={marker.imageUrl}/></a></li>
-          })}
-          <li><a href="#">»</a></li>
-
-        </ul>
-        <div className="container-bottom pull-left ">
-          <Photo currentMarker={currentMarkerObject}/>
+        <div className="row">
+          <ul className='pagination photoSlider' style={{height: '10%', display: 'inline'}}>
+            <li><a href="#">«</a></li>
+            {this.props.markers.map((marker) => {
+              return <li><a href="#"><MiniPhoto imageUrl={marker.imageUrl}/></a></li>
+            })}
+            <li><a href="#">»</a></li>
+          </ul>
+        </div>
+        <div className="row">
+          <div className="container-bottom pull-left ">
+            <Photo currentMarker={currentMarkerObject}/>
+          </div>
         </div>
       </div>
     )
