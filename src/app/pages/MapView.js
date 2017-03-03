@@ -43,10 +43,11 @@ const geolocation = (
  */
 
 const GoogleMapsComponent = withGoogleMap(props => {
-
+  const humanIcon = `${process.env.PUBLIC_URL}/humanIcon.png`;
   const circle = <Circle radius={1000} center={props.center} onClick={props.onMapClick}/>;
   const marker = <Marker
     position={props.center}
+    icon={humanIcon}
   />;
   //circle.bindTo('center', marker, 'position');
 
@@ -101,7 +102,7 @@ class MapView extends Component {
     // }
   };
 
-  handleMarkerRightClick = (targetMarker) => {
+  handleMarkerClick = (targetMarker) => {
     /*
      * All you modify is data, and the view is driven by data.
      * This is so called data-driven-development. (And yes, it's now in
@@ -146,7 +147,6 @@ class MapView extends Component {
   }
 
   render() {
-    console.log(this.props.markers);
     return (
       <div style={{height: `100%`}}>
         <Helmet
@@ -162,7 +162,7 @@ class MapView extends Component {
           onMapLoad={this.handleMapLoad}
           onMapClick={this.handleMapClick}
           markers={this.props.markers}
-          onMarkerClick={this.handleMarkerRightClick}
+          onMarkerClick={this.handleMarkerClick}
           center={this.state.center}
         />
       </div>

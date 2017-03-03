@@ -40,14 +40,12 @@ class RightContainer extends Component {
   }
 
   render() {
-    console.log('RightContainer props', this.props);
     let currentMarkerObject;
     this.props.markers.forEach((marker) => {
       if (marker.key === this.props.currentMarker) {
         currentMarkerObject = marker;
       }
     })
-    console.log('currentMarker', currentMarkerObject);
     if (!currentMarkerObject || !this.props.showNewMarkerPanel) return null;
     return (
       <div onMouseLeave={this.handleOnMouseLeave} style={{position: 'absolute',
