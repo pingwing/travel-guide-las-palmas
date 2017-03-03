@@ -10,8 +10,14 @@ import {
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducer';
+import configureStore from './store'
+//import localReducer from './localReducer';
 
-const store = createStore(reducer);
+//const store = createStore(localReducer);
+
+const initialState = window.__INITIAL_STATE__ || {firebase: { authError: null }}
+
+const store = configureStore(reducer, initialState)
 
 export default class App extends Component {
   render() {
@@ -22,3 +28,5 @@ export default class App extends Component {
     );
   }
 }
+
+

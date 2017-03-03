@@ -82,7 +82,7 @@ export default class Application extends Component {
             <RightContainer />
           </div>
         </div>
-        <div className="navbar navbar-default navbar-fixed-bottom" style={{height: "40%", margin: 'auto'}}>
+        <div className="navbar navbar-default navbar-fixed-bottom" style={{height: "40%", 'background': '#FFE8D1'}}>
           <PhotoSlider />
         </div>
       </div>

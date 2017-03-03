@@ -8,7 +8,27 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "Courier New", Courier, monospace;
+}
+label {
+  margin-left: 20px;
+}
+
+div.container-botton {
+
+}
+
+input {
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  margin: 10px;
+}
+
+button.delete {
+  float: right;
 }
 
 html, body, #root, .full-height {

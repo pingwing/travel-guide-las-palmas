@@ -12,6 +12,7 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  Circle,
 } from "../../lib";
 
 import {connect} from 'react-redux';
@@ -20,29 +21,63 @@ import {
   selectMarker,
 } from '../actions';
 
+import canUseDOM from "can-use-dom";
+
+import raf from "raf";
+
+import {
+  firebaseConnect,
+  isLoaded,
+  isEmpty,
+  dataToJS
+} from 'react-redux-firebase'
+
+const geolocation = (
+  canUseDOM && navigator.geolocation ?
+    navigator.geolocation :
+    ({
+      getCurrentPosition(success, failure) {
+        failure(`Your browser doesn't support geolocation.`);
+      },
+    })
+);
+
 /*
  * This is the modify version of:
  * https://developers.google.com/maps/documentation/javascript/examples/event-arguments
  *
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
-const GettingStartedGoogleMap = withGoogleMap(props => (
+const GoogleMapsComponent = withGoogleMap(props => (
   <GoogleMap
     ref={props.onMapLoad}
     defaultZoom={13}
-    defaultCenter={{lat: 28.114107, lng: -15.431281}}
+    center={props.center}
     onClick={props.onMapClick}
   >
-    {props.markers.map(marker => (
-      <Marker
-        {...marker}
-        onClick={() => props.onMarkerClick(marker)}
-      />
-    ))}
+    <Circle center={{lat: 28.114107, lng: -15.431281}} radius={1000}/>
+    {props.markers.map(marker => {
+
+
+      return (
+        <span>
+        <Marker
+          {...marker}
+          onClick={() => props.onMarkerClick(marker)}
+        />
+        </span>
+      )
+    })}
   </GoogleMap>
 ));
 
 class MapView extends Component {
+  state = {
+    center: {lat: 28.114107, lng: -15.431281},
+    radius: 6000,
+  };
+
+  isUnmounted = false;
   handleMapLoad = (map) => {
     this._mapComponent = map;
     if (map) {
@@ -56,6 +91,9 @@ class MapView extends Component {
    */
   handleMapClick = (event) => {
     const position = event.latLng;
+    const { firebase } = this.props
+    firebase.push('/todos', { text: position.lat(), done: false })
+
     this.props.dispatch(addMarker(position));
 
     // if (nextMarkers.length === 3) {
@@ -74,15 +112,47 @@ class MapView extends Component {
      */
     this.props.dispatch(selectMarker(targetMarker.key));
   };
+  componentDidMount() {
+    const tick = () => {
+      if (this.isUnmounted) {
+        return;
+      }
+      this.setState({ radius: Math.max(this.state.radius - 20, 0) });
 
+      if (this.state.radius > 200) {
+        raf(tick);
+      }
+    };
+    geolocation.getCurrentPosition((position) => {
+      if (this.isUnmounted) {
+        return;
+      }
+      this.setState({
+        center: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        },
+        content: `Location found using HTML5.`,
+      });
+
+      raf(tick);
+    }, (reason) => {
+      if (this.isUnmounted) {
+        return;
+      }
+      this.setState({
+        center: {lat: 28.114107, lng: -15.431281},
+        content: `Error: The Geolocation service failed (${reason}).`,
+      });
+    });
+  }
   render() {
-console.log(this.props.markers);
     return (
       <div style={{height: `100%`}}>
         <Helmet
           title="Travel Guide Las Palmas | React in Flip Flops"
         />
-        <GettingStartedGoogleMap
+        <GoogleMapsComponent
           containerElement={
             <div style={{height: `100%`}}/>
           }
@@ -93,16 +163,34 @@ console.log(this.props.markers);
           onMapClick={this.handleMapClick}
           markers={this.props.markers}
           onMarkerClick={this.handleMarkerRightClick}
+          center={this.state.center}
         />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    markers: state.markers,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     markers: state.markers,
+//   };
+// };
 
-export default connect(mapStateToProps)(MapView);
+// export default connect(mapStateToProps)(MapView);
+
+const fbWrappedMapView = firebaseConnect([
+  '/todos'
+  // { type: 'once', path: '/todos' } // for loading once instead of binding
+  // '/todos#populate=owner:displayNames' // for populating owner parameter from id into string loaded from /displayNames root
+  // '/todos#populate=collaborators:users' // for populating owner parameter from id to user object loaded from /users root
+  // { path: 'todos', populates: [{ child: 'collaborators', root: 'users' }] } // object notation of population
+  // '/todos#populate=owner:users:displayName' // for populating owner parameter from id within to displayName string from user object within users root
+])(MapView)
+
+export default connect(
+  (state) => ({
+    todos: dataToJS(state.firebase, 'todos'),
+    markers: state.local.markers
+  })
+)(fbWrappedMapView)
+
