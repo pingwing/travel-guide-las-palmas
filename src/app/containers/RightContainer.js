@@ -8,7 +8,8 @@ import {connect} from 'react-redux';
 import {
   editMarkerName,
   editMarkerImageUrl,
-  showHideNewMarkerPanel
+  showHideNewMarkerPanel,
+  deleteMarker
 } from '../actions';
 
 class RightContainer extends Component {
@@ -23,6 +24,10 @@ class RightContainer extends Component {
 
   showHideNewMarkerPanel = (evt) => {
       this.props.dispatch(showHideNewMarkerPanel());
+  }
+
+  deleteMarker = (evt) => {
+      this.props.dispatch(deleteMarker());
   }
 
   render() {
@@ -48,6 +53,7 @@ class RightContainer extends Component {
           <label>Name:<InputComponent value={currentMarkerObject.name} onChange={this.editMarkerName} /></label>
           <label>Image URL:<InputComponent value={currentMarkerObject.imageUrl} onChange={this.editMarkerImageUrl} /></label>
           <button onClick={this.showHideNewMarkerPanel}>Hide</button>
+          <button onClick={this.deleteMarker}>Delete</button>
         </LocationDetails>
       </div>
     </div>
