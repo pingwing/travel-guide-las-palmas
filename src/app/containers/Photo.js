@@ -11,11 +11,12 @@ export default class Photo extends Component {
           <div className="row">
             <label> Description:</label>
             <div className="row">
-              <textarea className='col col-md-6' rows="8"/>
+              <p>
+                {this.props.currentMarker.description}
+              </p>
             </div>
           </div>
         </div>
-        <p>{this.props.currentMarker.description}</p>
       </div>
     )
   }
