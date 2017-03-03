@@ -9,9 +9,12 @@ import {
   editMarkerName,
   editMarkerImageUrl,
   showHideNewMarkerPanel,
-  editMarkerDescription,
   deleteMarker,
+<<<<<<< HEAD
+  editMarkerDescription
+=======
   hideNewMarkerPanel
+>>>>>>> 4b90abdb7dd0b985143b1a795e7069768a433efb
 } from '../actions';
 
 class RightContainer extends Component {
