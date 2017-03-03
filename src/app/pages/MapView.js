@@ -198,12 +198,13 @@ class MapView extends Component {
           contentLabel="Hello Modal"
           style={customModalStyles}
         >
-
-          <h2 ref="subtitle">Hello traveller!</h2>
-          <div></div>
-          <label>How much time do you have? <InputComponent value={this.state.howManyHours} onChange={this.editMarkerDescription}/> hours</label>
-          <br/>
-          <button onClick={this.closeModal}>Start EXPLORING!</button>
+          <div className="row">
+            <h2 style={{display:'inline'}} ref="subtitle">Hello traveller!</h2>
+          </div>
+          <p style={{display:'inline'}}>How much time do you have? </p>
+          <InputComponent style={{display:'inline'}} value={this.state.howManyHours} onChange={this.editMarkerDescription}/>
+          <p style={{display:'inline'}}> hours</p>
+          <button className="btn btn-success" onClick={this.closeModal}>Start EXPLORING!</button>
         </Modal>
         <GoogleMapsComponent
           containerElement={
