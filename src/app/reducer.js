@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
         defaultAnimation: 2,
         key: Date.now().toString(),
         name: '',
-        imageUrl: '',
+        imageUrl: 'https://media.giphy.com/media/3o6Zti9NTwp5OEJHEc/giphy.gif',
         description: '',
       };
       const nextMarkers = [

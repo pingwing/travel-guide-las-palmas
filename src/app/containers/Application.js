@@ -38,7 +38,6 @@ import {
 
 import Helmet from "react-helmet";
 import RightContainer from './RightContainer';
-import Photo from './Photo';
 import PhotoSlider from './PhotoSlider';
 export default class Application extends Component {
 
@@ -91,9 +90,6 @@ export default class Application extends Component {
         </div>
         <div className="navbar navbar-default navbar-fixed-bottom" style={{height: "40%", margin:'auto'}}>
           <PhotoSlider />
-          <div className="container-bottom pull-left ">
-          <Photo/>
-          </div>
         </div>
       </div>
     );
