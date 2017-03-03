@@ -3,13 +3,8 @@ import {Component} from 'react';
 import MiniPhoto from "./MiniPhoto";
 import {connect} from 'react-redux';
 import Photo from './Photo';
-import selectMarker from '../actions';
 
 class PhotoSlider extends Component {
-  onClick = (evt) => {
-    this.props.dispatch(selectMarker(evt.target.key))
-  };
-
   render() {
 
     let currentMarkerObject;
@@ -20,23 +15,38 @@ class PhotoSlider extends Component {
     });
     if (!currentMarkerObject) currentMarkerObject = this.props.markers[0];
     console.log('currentMarker', currentMarkerObject);
+
     console.log('PINGWIN: this.props', this.props);
     const photo = currentMarkerObject ? <Photo currentMarker={currentMarkerObject}/> : null;
     return (
       <div>
+<<<<<<< HEAD
         <div className="row">
           <ul className='pagination photoSlider' style={{height: '10%', display: 'inline'}}>
             <li><a href="#">«</a></li>
             {this.props.markers.map((marker) => {
-              return <li><a href="#"><MiniPhoto click={this.onClick} imageUrl={marker.imageUrl}/></a></li>
+              return <li><a href="#"><MiniPhoto imageUrl={marker.imageUrl}/></a></li>
             })}
             <li><a href="#">»</a></li>
           </ul>
         </div>
         <div className="row">
           <div className="container-bottom pull-left ">
-            {photo}
+            <Photo currentMarker={currentMarkerObject}/>
           </div>
+=======
+        <ul className='pagination photoSlider' style={{height: '10%', display: 'inline'}}>
+          <li><a href="#">«</a></li>
+          {this.props.markers.map((marker) => {
+            return <li><a href="#"><MiniPhoto imageUrl={marker.imageUrl}/></a></li>
+          })}
+          <li><a href="#">»</a></li>
+
+        </ul>
+        <div className="container-bottom pull-left ">
+
+          {photo}
+>>>>>>> cb51baba7b4c91ce0a402ace798fa87ce61560ca
         </div>
       </div>
     )
