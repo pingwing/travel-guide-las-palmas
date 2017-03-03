@@ -10,7 +10,7 @@ export default class Photo extends Component {
                src={this.props.currentMarker.imageUrl}/>
           <div className="row">
             <label> Description:</label>
-            <div className="row">
+            <div className="row" style={{wordWrap: 'break-word', width: '900'}}>
               <p>
                 {this.props.currentMarker.description}
               </p>
