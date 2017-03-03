@@ -23,7 +23,7 @@ class PhotoSlider extends Component {
     console.log('PINGWIN: this.props', this.props);
     const photo = currentMarkerObject ? <Photo currentMarker={currentMarkerObject}/> : null;
     return (
-      <div style={{'max-width': '1000px', margin: '0 auto'}} >
+      <div style={{'max-width': '1000px', margin: '0 auto', background: '#F26419'}} >
         <div className="row">
           <ul className='pagination photoSlider' style={{height: '10%', display: 'inline'}}>
             <li><a style={{marginLeft:'30px'}} href="#">«</a></li>
