@@ -19,19 +19,28 @@ class PhotoSlider extends Component {
 
   render() {
     let currentMarkerObject;
-    this.props.markers.forEach((marker) => {
-      if (marker.key === this.props.currentMarker) {
-        currentMarkerObject = marker;
-      }
-    });
-    if (!currentMarkerObject) currentMarkerObject = this.props.markers[0];
+    const { markers } = this.props
+    if (isLoaded(markers) && !isEmpty(markers)) {
+      this.props.markers.forEach((marker) => {
+        if (marker.key === this.props.currentMarker) {
+          currentMarkerObject = marker;
+        }
+      });
+    }  
+
+    if (!currentMarkerObject) {
+      currentMarkerObject = null;
+    } else {
+      currentMarkerObject =  this.props.markers[0];
+    }
     const photo = currentMarkerObject ? <Photo currentMarker={currentMarkerObject}/> : null;
+    
     return (
       <div style={{'max-width': '1000px', margin: '0 auto', background: '#568EA3', height: '100%', color: 'white'}} >
         <div className="row">
           <ul className='pagination photoSlider' style={{height: '10%', display: 'inline'}}>
             <li><a style={{marginLeft:'30px'}} href="#">«</a></li>
-            {this.props.markers.map((marker) => {
+            { !isLoaded(markers) || isEmpty(markers) ? '' : this.props.markers.map((marker) => {
               return <li><a href="#"><MiniPhoto click={this.onClick} imageUrl={marker.imageUrl} markerKey={marker.key}/></a></li>
             })}
             <li><a style={{float: 'right', marginRight: '30px'}} href="#">»</a></li>
@@ -55,7 +64,8 @@ class PhotoSlider extends Component {
 // export default connect(mapStateToProps)(PhotoSlider);
 
 const fbWrappedPhotoSlider = firebaseConnect([
-  '/todos'
+  '/todos',
+  '/markers',
   // { type: 'once', path: '/todos' } // for loading once instead of binding
   // '/todos#populate=owner:displayNames' // for populating owner parameter from id into string loaded from /displayNames root
   // '/todos#populate=collaborators:users' // for populating owner parameter from id to user object loaded from /users root
@@ -66,7 +76,8 @@ const fbWrappedPhotoSlider = firebaseConnect([
 export default connect(
   (state) => ({
     todos: dataToJS(state.firebase, 'todos'),
-    markers: state.local.markers,
+    markers: dataToJS(state.firebase, 'markers'),
+    //markers: state.local.markers,
     currentMarker: state.local.currentMarker
   })
 )(fbWrappedPhotoSlider)

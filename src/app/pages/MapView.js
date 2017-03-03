@@ -48,17 +48,25 @@ const geolocation = (
  *
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
-const GoogleMapsComponent = withGoogleMap(props => (
-  <GoogleMap
+
+
+
+
+const GoogleMapsComponent = withGoogleMap(props => {
+
+let markers = [];
+for (const key of Object.keys(props.markers)) {
+    markers.push(props.markers[key]);
+}
+
+  return (<GoogleMap
     ref={props.onMapLoad}
     defaultZoom={13}
     center={props.center}
     onClick={props.onMapClick}
   >
     <Circle center={{lat: 28.114107, lng: -15.431281}} radius={1000}/>
-    {props.markers.map(marker => {
-
-
+    { markers.map(marker => {
       return (
         <span>
         <Marker
@@ -69,7 +77,7 @@ const GoogleMapsComponent = withGoogleMap(props => (
       )
     })}
   </GoogleMap>
-));
+)});
 
 class MapView extends Component {
   state = {
@@ -90,11 +98,23 @@ class MapView extends Component {
    * Go and try click now.
    */
   handleMapClick = (event) => {
-    const position = event.latLng;
+    const position = {lat: event.latLng.lat(), lng: event.latLng.lng()};
     const { firebase } = this.props
-    firebase.push('/todos', { text: position.lat(), done: false })
 
-    this.props.dispatch(addMarker(position));
+    const newMarker = {
+      position,
+      defaultAnimation: 2,
+      key: Date.now().toString(),
+      name: '',
+      imageUrl: 'https://media.giphy.com/media/3o6Zti9NTwp5OEJHEc/giphy.gif',
+      description: '',
+    };    
+
+    console.log(newMarker);
+
+    firebase.push('/markers', newMarker)
+
+    //this.props.dispatch(addMarker(position));
 
     // if (nextMarkers.length === 3) {
     //   this.props.toast(
@@ -179,7 +199,8 @@ class MapView extends Component {
 // export default connect(mapStateToProps)(MapView);
 
 const fbWrappedMapView = firebaseConnect([
-  '/todos'
+  '/todos',
+  '/markers',
   // { type: 'once', path: '/todos' } // for loading once instead of binding
   // '/todos#populate=owner:displayNames' // for populating owner parameter from id into string loaded from /displayNames root
   // '/todos#populate=collaborators:users' // for populating owner parameter from id to user object loaded from /users root
@@ -190,7 +211,8 @@ const fbWrappedMapView = firebaseConnect([
 export default connect(
   (state) => ({
     todos: dataToJS(state.firebase, 'todos'),
-    markers: state.local.markers
+    markers: dataToJS(state.firebase, 'markers'),
+    //markers: state.local.markers
   })
 )(fbWrappedMapView)
 

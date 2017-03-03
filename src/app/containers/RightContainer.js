@@ -46,14 +46,24 @@ class RightContainer extends Component {
   }
 
   render() {
-    console.log('RightContainer props', this.props);
+
     let currentMarkerObject;
-    this.props.markers.forEach((marker) => {
-      if (marker.key === this.props.currentMarker) {
-        currentMarkerObject = marker;
-      }
-    })
-    console.log('currentMarker', currentMarkerObject);
+
+    const { markers } = this.props
+    if (isLoaded(markers) && !isEmpty(markers)) {
+      this.props.markers.forEach((marker) => {
+        if (marker.key === this.props.currentMarker) {
+          currentMarkerObject = marker;
+        }
+      })
+    }                    
+
+    // this.props.markers.forEach((marker) => {
+    //   if (marker.key === this.props.currentMarker) {
+    //     currentMarkerObject = marker;
+    //   }
+    // })
+
     if (!currentMarkerObject || !this.props.showNewMarkerPanel) return null;
     return (
       <div onMouseLeave={this.handleOnMouseLeave} style={{position: 'absolute',
@@ -88,7 +98,8 @@ class RightContainer extends Component {
 // export default connect(mapStateToProps)(RightContainer);
 
 const fbWrappedRightContainer = firebaseConnect([
-  '/todos'
+  '/todos',
+  '/markers',
   // { type: 'once', path: '/todos' } // for loading once instead of binding
   // '/todos#populate=owner:displayNames' // for populating owner parameter from id into string loaded from /displayNames root
   // '/todos#populate=collaborators:users' // for populating owner parameter from id to user object loaded from /users root
@@ -99,7 +110,8 @@ const fbWrappedRightContainer = firebaseConnect([
 export default connect(
   (state) => ({
     todos: dataToJS(state.firebase, 'todos'),
-    markers: state.local.markers,
+    markers: dataToJS(state.firebase, 'markers'),
+    //markers: state.local.markers,
     currentMarker: state.local.currentMarker,
     showNewMarkerPanel: state.local.showNewMarkerPanel
   })
