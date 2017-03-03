@@ -63,7 +63,15 @@ class RightContainer extends Component {
   }
 
   deleteMarker = (evt) => {
-    this.props.dispatch(deleteMarker());
+    const {firebase, markers} = this.props;
+    let id = null;
+    for (const key of Object.keys(markers)) {
+      const marker = markers[key];
+      if (marker.key === this.props.currentMarker) {
+        id = key;
+      }
+    }
+    firebase.remove(`/markers/${id}`)
   }
 
   handleOnMouseLeave = (evt) => {
