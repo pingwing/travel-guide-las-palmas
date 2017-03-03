@@ -70,9 +70,13 @@ const reducer = (state = initialState, action) => {
         showNewMarkerPanel: true
       };      
     case 'DELETE_MARKER':
+      const filteredMarkers = state.markers.filter(function(marker) {
+          return marker.key === state.currentMarker ? false : true;
+      });
       return {
         ...state,
-        inputValue: action.text,
+        markers: filteredMarkers,
+        showNewMarkerPanel: false
       };
     case 'SHOW_HIDE_NEW_MARKER_PANEL':
       return {

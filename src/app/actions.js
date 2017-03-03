@@ -26,10 +26,9 @@ export const selectMarker = (key) => {
   };
 };
 
-export const deleteMarker = (key) => {
+export const deleteMarker = () => {
   return {
-    type: 'DELETE_MARKER',
-    key,
+    type: 'DELETE_MARKER'
   };
 }
 
