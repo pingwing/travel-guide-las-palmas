@@ -6,7 +6,7 @@ export default class Photo extends Component {
     return (<div className="row">
         <p className="name row" style={{height:'10px', marginLeft:'5em'}}>{this.props.currentMarker.name}</p>
         <div className="row">
-          <img role="presentation" className="col col-md-3 image pull-left" style={{marginLeft:'5em', maxHeight:'200px'}}
+          <img role="presentation" className="col col-md-3 image pull-left" style={{marginLeft:'5em', width:'540px', height: 'auto'}}
                src={this.props.currentMarker.imageUrl}/>
           <div className="row">
             <label> Description:</label>

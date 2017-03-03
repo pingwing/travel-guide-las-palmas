@@ -4,7 +4,6 @@ import {Component} from 'react';
 export default class MiniPhoto extends Component {
 
   onClickHandler = () => {
-    console.log('PINGWIN: this.props', this.props);
     this.props.click(this.props.markerKey);
   };
 
