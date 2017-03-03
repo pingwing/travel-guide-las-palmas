@@ -4,6 +4,9 @@ import MiniPhoto from "./MiniPhoto";
 import {connect} from 'react-redux';
 import Photo from './Photo';
 import selectMarker from '../actions';
+import { firebase, helpers } from 'react-redux-firebase'
+
+const { isLoaded, isEmpty, pathToJS, dataToJS } = helpers
 
 class PhotoSlider extends Component {
   onClick = (evt) => {
@@ -22,6 +25,9 @@ class PhotoSlider extends Component {
     console.log('currentMarker', currentMarkerObject);
     console.log('PINGWIN: this.props', this.props);
     const photo = currentMarkerObject ? <Photo currentMarker={currentMarkerObject}/> : null;
+
+  //firebase.push('/messages', { text: Date.now().toString()});
+
     return (
       <div>
         <div className="row">
@@ -49,5 +55,15 @@ const mapStateToProps = (state) => {
     currentMarker: state.currentMarker
   };
 };
+ 
+const ComponentWithRedux = connect(mapStateToProps)(PhotoSlider);
 
-export default connect(mapStateToProps)(PhotoSlider);
+const fbWrappedComponent = firebase([
+  '/message'
+])(ComponentWithRedux)
+
+export default connect(
+  ({firebase}) => ({
+    message: dataToJS(firebase, 'message'),
+  })
+)(fbWrappedComponent)

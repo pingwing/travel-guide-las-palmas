@@ -39,6 +39,7 @@ import {
 import Helmet from "react-helmet";
 import RightContainer from './RightContainer';
 import PhotoSlider from './PhotoSlider';
+
 export default class Application extends Component {
 
   handleToast = this.handleToast.bind(this);
