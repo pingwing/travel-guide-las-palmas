@@ -44,7 +44,7 @@ const geolocation = (
 
 const GoogleMapsComponent = withGoogleMap(props => {
 
-  const circle = <Circle radius={1000} center={props.center}/>;
+  const circle = <Circle radius={1000} center={props.center} onClick={props.onMapClick}/>;
   const marker = <Marker
     position={props.center}
   />;
