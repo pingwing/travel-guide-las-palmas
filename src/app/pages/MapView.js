@@ -35,12 +35,18 @@ const GoogleMapsComponent = withGoogleMap(props => (
     onClick={props.onMapClick}
   >
     <Circle center={{lat: 28.114107, lng: -15.431281}} radius={1000}/>
-    {props.markers.map(marker => (
-      <Marker
-        {...marker}
-        onClick={() => props.onMarkerClick(marker)}
-      />
-    ))}
+    {props.markers.map(marker => {
+
+
+      return (
+        <span>
+        <Marker
+          {...marker}
+          onClick={() => props.onMarkerClick(marker)}
+        />
+        </span>
+      )
+    })}
   </GoogleMap>
 ));
 
@@ -78,7 +84,7 @@ class MapView extends Component {
   };
 
   render() {
-console.log(this.props.markers);
+    console.log(this.props.markers);
     return (
       <div style={{height: `100%`}}>
         <Helmet

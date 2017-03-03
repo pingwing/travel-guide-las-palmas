@@ -41,13 +41,26 @@ const reducer = (state = initialState, action) => {
       const editedMarkers = state.markers.map((marker) => {
         const markerToReturn = marker;
           if (marker.key === state.currentMarker) {
-            markerToReturn.name = action.name;
+            markerToReturn.name = action.text;
           }
           return markerToReturn;
       });
       return {
         ...state,
         markers: editedMarkers,
+        showNewMarkerPanel: true
+      };
+    case 'EDIT_MARKER_DESCRIPTION':
+      const editedMarkers2 = state.markers.map((marker) => {
+        const markerToReturn = marker;
+        if (marker.key === state.currentMarker) {
+          markerToReturn.description = action.text;
+        }
+        return markerToReturn;
+      });
+      return {
+        ...state,
+        markers: editedMarkers2,
         showNewMarkerPanel: true
       };
     case 'SELECT_MARKER':

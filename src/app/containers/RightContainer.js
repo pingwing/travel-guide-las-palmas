@@ -9,13 +9,17 @@ import {
   editMarkerName,
   editMarkerImageUrl,
   showHideNewMarkerPanel,
-  deleteMarker
+  deleteMarker,
+  editMarkerDescription
 } from '../actions';
 
 class RightContainer extends Component {
 
   editMarkerName = (evt) => {
       this.props.dispatch(editMarkerName(evt.target.value));
+  }
+  editMarkerDescription = (evt) => {
+    this.props.dispatch(editMarkerDescription(evt.target.value));
   }
 
   editMarkerImageUrl = (evt) => {
@@ -51,6 +55,7 @@ class RightContainer extends Component {
           <label>Lat:<InputComponent value={currentMarkerObject.position.lat()} /></label>
           <label>Lng:<InputComponent value={currentMarkerObject.position.lng()} /></label>
           <label>Name:<InputComponent value={currentMarkerObject.name} onChange={this.editMarkerName} /></label>
+          <label>Description:<InputComponent value={currentMarkerObject.description} onChange={this.editMarkerDescription} /></label>
           <label>Image URL:<InputComponent value={currentMarkerObject.imageUrl} onChange={this.editMarkerImageUrl} /></label>
           <button onClick={this.showHideNewMarkerPanel}>Hide</button>
           <button onClick={this.deleteMarker}>Delete</button>
