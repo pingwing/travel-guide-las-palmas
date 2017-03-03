@@ -1,7 +1,14 @@
-export const editMarkerName = (name) => {
+export const editMarkerName = (text) => {
   return {
     type: 'EDIT_MARKER_NAME',
-    name,
+    text,
+  };
+};
+
+export const editMarkerDescription = (text) => {
+  return {
+    type: 'EDIT_MARKER_DESCRIPTION',
+    text,
   };
 };
 
@@ -35,5 +42,11 @@ export const deleteMarker = () => {
 export const showHideNewMarkerPanel = () => {
   return {
     type: 'SHOW_HIDE_NEW_MARKER_PANEL'
+  };
+}
+
+export const hideNewMarkerPanel = () => {
+  return {
+    type: 'HIDE_NEW_MARKER_PANEL'
   };
 }

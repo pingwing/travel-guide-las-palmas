@@ -1,16 +1,6 @@
 // The todo items
 const initialState = {
-  markers: [{
-    position: {
-      lat: 25.0112183,
-      lng: 121.52067570000001,
-    },
-    key: `Taiwan`,
-    defaultAnimation: 2,
-    name: '',
-    imageUrl: '',
-    description: '',
-  }],
+  markers: [],
   currentMarker: '',
   showNewMarkerPanel: true
 };
@@ -41,13 +31,26 @@ const reducer = (state = initialState, action) => {
       const editedMarkers = state.markers.map((marker) => {
         const markerToReturn = marker;
           if (marker.key === state.currentMarker) {
-            markerToReturn.name = action.name;
+            markerToReturn.name = action.text;
           }
           return markerToReturn;
       });
       return {
         ...state,
         markers: editedMarkers,
+        showNewMarkerPanel: true
+      };
+    case 'EDIT_MARKER_DESCRIPTION':
+      const editedMarkers2 = state.markers.map((marker) => {
+        const markerToReturn = marker;
+        if (marker.key === state.currentMarker) {
+          markerToReturn.description = action.text;
+        }
+        return markerToReturn;
+      });
+      return {
+        ...state,
+        markers: editedMarkers2,
         showNewMarkerPanel: true
       };
     case 'SELECT_MARKER':
@@ -83,6 +86,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         showNewMarkerPanel: !state.showNewMarkerPanel
       }
+    case 'HIDE_NEW_MARKER_PANEL':
+      return {
+        ...state,
+        showNewMarkerPanel: false
+      }      
     default:
       return state;
   }

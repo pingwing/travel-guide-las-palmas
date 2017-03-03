@@ -17,6 +17,7 @@ class PhotoSlider extends Component {
     console.log('currentMarker', currentMarkerObject);
 
     console.log('PINGWIN: this.props', this.props);
+    const photo = currentMarkerObject ? <Photo currentMarker={currentMarkerObject}/> : null;
     return (
       <div>
         <div className="row">
@@ -30,7 +31,7 @@ class PhotoSlider extends Component {
         </div>
         <div className="row">
           <div className="container-bottom pull-left ">
-            <Photo currentMarker={currentMarkerObject}/>
+            {photo}
           </div>
         </div>
       </div>
