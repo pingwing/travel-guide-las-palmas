@@ -21,6 +21,20 @@ import {
   selectMarker,
 } from '../actions';
 
+import canUseDOM from "can-use-dom";
+
+import raf from "raf";
+
+const geolocation = (
+  canUseDOM && navigator.geolocation ?
+    navigator.geolocation :
+    ({
+      getCurrentPosition(success, failure) {
+        failure(`Your browser doesn't support geolocation.`);
+      },
+    })
+);
+
 /*
  * This is the modify version of:
  * https://developers.google.com/maps/documentation/javascript/examples/event-arguments
@@ -31,7 +45,7 @@ const GoogleMapsComponent = withGoogleMap(props => (
   <GoogleMap
     ref={props.onMapLoad}
     defaultZoom={13}
-    defaultCenter={{lat: 28.114107, lng: -15.431281}}
+    center={props.center}
     onClick={props.onMapClick}
   >
     <Circle center={{lat: 28.114107, lng: -15.431281}} radius={1000}/>
@@ -51,6 +65,12 @@ const GoogleMapsComponent = withGoogleMap(props => (
 ));
 
 class MapView extends Component {
+  state = {
+    center: {lat: 28.114107, lng: -15.431281},
+    radius: 6000,
+  };
+
+  isUnmounted = false;
   handleMapLoad = (map) => {
     this._mapComponent = map;
     if (map) {
@@ -82,7 +102,40 @@ class MapView extends Component {
      */
     this.props.dispatch(selectMarker(targetMarker.key));
   };
+  componentDidMount() {
+    const tick = () => {
+      if (this.isUnmounted) {
+        return;
+      }
+      this.setState({ radius: Math.max(this.state.radius - 20, 0) });
 
+      if (this.state.radius > 200) {
+        raf(tick);
+      }
+    };
+    geolocation.getCurrentPosition((position) => {
+      if (this.isUnmounted) {
+        return;
+      }
+      this.setState({
+        center: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        },
+        content: `Location found using HTML5.`,
+      });
+
+      raf(tick);
+    }, (reason) => {
+      if (this.isUnmounted) {
+        return;
+      }
+      this.setState({
+        center: {lat: 28.114107, lng: -15.431281},
+        content: `Error: The Geolocation service failed (${reason}).`,
+      });
+    });
+  }
   render() {
     console.log(this.props.markers);
     return (
@@ -101,6 +154,7 @@ class MapView extends Component {
           onMapClick={this.handleMapClick}
           markers={this.props.markers}
           onMarkerClick={this.handleMarkerRightClick}
+          center={this.state.center}
         />
       </div>
     );
