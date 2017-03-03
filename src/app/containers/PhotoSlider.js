@@ -12,26 +12,31 @@ import {
 } from 'react-redux-firebase';
 
 class PhotoSlider extends Component {
+
   onClick = (markerKey) => {
-    console.log('PINGWIN: markerKey', markerKey);
     this.props.dispatch(selectMarker(markerKey))
   };
 
   render() {
+
+    if (!isLoaded(this.props.markers) || isEmpty(this.props.markers)) return null;
+
+    let markers = [];
+    for (const key of Object.keys(this.props.markers)) {
+        markers.push(this.props.markers[key]);
+    }    
+
     let currentMarkerObject;
-    const { markers } = this.props
-    if (isLoaded(markers) && !isEmpty(markers)) {
-      this.props.markers.forEach((marker) => {
-        if (marker.key === this.props.currentMarker) {
-          currentMarkerObject = marker;
-        }
-      });
-    }  
+    markers.forEach((marker) => {
+      if (marker.key === this.props.currentMarker) {
+        currentMarkerObject = marker;
+      }
+    });
 
     if (!currentMarkerObject) {
       currentMarkerObject = null;
     } else {
-      currentMarkerObject =  this.props.markers[0];
+      currentMarkerObject =  markers[0];
     }
     const photo = currentMarkerObject ? <Photo currentMarker={currentMarkerObject}/> : null;
     
@@ -40,7 +45,7 @@ class PhotoSlider extends Component {
         <div className="row">
           <ul className='pagination photoSlider' style={{height: '10%', display: 'inline'}}>
             <li><a style={{marginLeft:'30px'}} href="#">«</a></li>
-            { !isLoaded(markers) || isEmpty(markers) ? '' : this.props.markers.map((marker) => {
+            { !isLoaded(markers) || isEmpty(markers) ? '' : markers.map((marker) => {
               return <li><a href="#"><MiniPhoto click={this.onClick} imageUrl={marker.imageUrl} markerKey={marker.key}/></a></li>
             })}
             <li><a style={{float: 'right', marginRight: '30px'}} href="#">»</a></li>

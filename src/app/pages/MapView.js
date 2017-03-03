@@ -48,16 +48,16 @@ const geolocation = (
  *
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
-
-
-
-
 const GoogleMapsComponent = withGoogleMap(props => {
 
-let markers = [];
-for (const key of Object.keys(props.markers)) {
-    markers.push(props.markers[key]);
-}
+  //console.log(props);
+
+  if (!isLoaded(props.markers) || isEmpty(props.markers)) return null;
+
+  let markers = [];
+  for (const key of Object.keys(props.markers)) {
+      markers.push(props.markers[key]);
+  }
 
   return (<GoogleMap
     ref={props.onMapLoad}

@@ -23,14 +23,39 @@ import {
 class RightContainer extends Component {
 
   editMarkerName = (evt) => {
-    this.props.dispatch(editMarkerName(evt.target.value));
+    const {firebase, markers} = this.props;
+    let id = null;
+    for (const key of Object.keys(markers)) {
+      const marker = markers[key];
+      if (marker.key === this.props.currentMarker) {
+        id = key;
+      }
+    }
+    firebase.set(`/markers/${id}/name`, evt.target.value);
   }
+
   editMarkerDescription = (evt) => {
-    this.props.dispatch(editMarkerDescription(evt.target.value));
+    const {firebase, markers} = this.props;
+    let id = null;
+    for (const key of Object.keys(markers)) {
+      const marker = markers[key];
+      if (marker.key === this.props.currentMarker) {
+        id = key;
+      }
+    }
+    firebase.set(`/markers/${id}/description`, evt.target.value);
   }
 
   editMarkerImageUrl = (evt) => {
-    this.props.dispatch(editMarkerImageUrl(evt.target.value));
+    const {firebase, markers} = this.props;
+    let id = null;
+    for (const key of Object.keys(markers)) {
+      const marker = markers[key];
+      if (marker.key === this.props.currentMarker) {
+        id = key;
+      }
+    }
+    firebase.set(`/markers/${id}/imageUrl`, evt.target.value);
   }
 
   showHideNewMarkerPanel = (evt) => {
@@ -47,16 +72,24 @@ class RightContainer extends Component {
 
   render() {
 
-    let currentMarkerObject;
+    if (!isLoaded(this.props.markers) || isEmpty(this.props.markers)) return null;
 
-    const { markers } = this.props
-    if (isLoaded(markers) && !isEmpty(markers)) {
-      this.props.markers.forEach((marker) => {
-        if (marker.key === this.props.currentMarker) {
-          currentMarkerObject = marker;
-        }
-      })
-    }                    
+    let markers = [];
+    for (const key of Object.keys(this.props.markers)) {
+        markers.push(this.props.markers[key]);
+    }    
+
+    //console.log('RigthContainer::markers: ', markers);
+
+    let currentMarkerObject;
+    markers.forEach((marker) => {
+      if (marker.key === this.props.currentMarker) {
+        currentMarkerObject = marker;
+      }
+    });              
+
+    //console.log('RigthContainer::currentMarker: ', this.props.currentMarker);    
+    //console.log('RigthContainer::currentMarkerObject: ', currentMarkerObject);
 
     // this.props.markers.forEach((marker) => {
     //   if (marker.key === this.props.currentMarker) {
@@ -73,8 +106,8 @@ class RightContainer extends Component {
       right: '0px',}}>
         <div className="content">
           <LocationDetails>
-            <label>Lat:<InputComponent value={currentMarkerObject.position.lat()}/></label>
-            <label>Lng:<InputComponent value={currentMarkerObject.position.lng()}/></label>
+            <label>Lat:<InputComponent value={currentMarkerObject.position.lat}/></label>
+            <label>Lng:<InputComponent value={currentMarkerObject.position.lng}/></label>
             <label>Name:<InputComponent value={currentMarkerObject.name} onChange={this.editMarkerName}/></label>
             <label>Description:<InputComponent value={currentMarkerObject.description} onChange={this.editMarkerDescription}/></label>
             <label>Image URL:<InputComponent value={currentMarkerObject.imageUrl} onChange={this.editMarkerImageUrl}/></label>.
