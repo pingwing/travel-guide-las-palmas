@@ -8,8 +8,8 @@ export default class MiniPhoto extends Component {
   };
 
   render() {
-    return (<div onClick={this.onClickHandler}>
-        <img role="presentation" className="col col-lg image pull-left" style={{height: '20px',}}
+    return (<div onClick={this.onClickHandler} >
+        <img role="presentation" className="col col-lg photo pull-left" style={this.props.style}
              src={this.props.imageUrl}/>
       </div>
     )
