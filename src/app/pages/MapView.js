@@ -25,6 +25,8 @@ import canUseDOM from "can-use-dom";
 
 import raf from "raf";
 
+import Modal from 'react-modal';
+import InputComponent from '../containers/InputComponent';
 const geolocation = (
   canUseDOM && navigator.geolocation ?
     navigator.geolocation :
@@ -43,8 +45,12 @@ const geolocation = (
  */
 
 const GoogleMapsComponent = withGoogleMap(props => {
+
+  const walkingRadius = ((parseFloat(props.howManyHours)-0.2)*7000)/2;
+  console.log('PINGWIN: walkingRadius', walkingRadius);
+
   const humanIcon = `${process.env.PUBLIC_URL}/humanIcon.png`;
-  const circle = <Circle radius={1000} center={props.center} onClick={props.onMapClick}/>;
+  const circle = <Circle radius={walkingRadius} center={props.center} onClick={props.onMapClick}/>;
   const marker = <Marker
     position={props.center}
     icon={humanIcon}
@@ -52,30 +58,33 @@ const GoogleMapsComponent = withGoogleMap(props => {
   //circle.bindTo('center', marker, 'position');
 
   return (
-  <GoogleMap
-    ref={props.onMapLoad}
-    defaultZoom={13}
-    center={props.center}
-    onClick={props.onMapClick}
-  >
-    {marker}
-    {circle}
+    <GoogleMap
+      ref={props.onMapLoad}
+      defaultZoom={13}
+      center={props.center}
+      onClick={props.onMapClick}
+    >
+      {marker}
+      {circle}
 
-    {props.markers.map(marker => {
-      return (
-        <Marker
-          {...marker}
-          onClick={() => props.onMarkerClick(marker)}
-        />
-      )
-    })}
-  </GoogleMap>
-)});
+      {props.markers.map(marker => {
+        return (
+          <Marker
+            {...marker}
+            onClick={() => props.onMarkerClick(marker)}
+          />
+        )
+      })}
+    </GoogleMap>
+  )
+});
 
 class MapView extends Component {
   state = {
     center: {lat: 28.114107, lng: -15.431281},
     radius: 6000,
+    modalIsOpen: true,
+    howManyHours: '2',
   };
 
   isUnmounted = false;
@@ -146,12 +155,56 @@ class MapView extends Component {
     });
   }
 
+  closeModal = () => {
+    this.setState({modalIsOpen: false});
+  }
+
+  editMarkerDescription = (evt) => {
+    this.setState({howManyHours: evt.target.value});
+  };
+
   render() {
+    const customModalStyles = {overlay : {
+      position          : 'fixed',
+      top               : 0,
+      left              : 0,
+      right             : 0,
+      bottom            : 0,
+      backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+    },
+      content : {
+        position                   : 'absolute',
+        top                        : '300px',
+        left                       : '300px',
+        right                      : '300px',
+        bottom                     : '300px',
+        border                     : '1px solid #ccc',
+        background                 : '#fff',
+        overflow                   : 'auto',
+        WebkitOverflowScrolling    : 'touch',
+        borderRadius               : '4px',
+        outline                    : 'none',
+        padding                    : '20px'
+
+      }};
     return (
       <div style={{height: `100%`}}>
         <Helmet
           title="Travel Guide Las Palmas | React in Flip Flops"
         />
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          contentLabel="Hello Modal"
+          style={customModalStyles}
+        >
+
+          <h2 ref="subtitle">Hello traveller!</h2>
+          <div></div>
+          <label>How much time do you have? <InputComponent value={this.state.howManyHours} onChange={this.editMarkerDescription}/> hours</label>
+          <br/>
+          <button onClick={this.closeModal}>Start EXPLORING!</button>
+        </Modal>
         <GoogleMapsComponent
           containerElement={
             <div style={{height: `100%`}}/>
@@ -164,6 +217,7 @@ class MapView extends Component {
           markers={this.props.markers}
           onMarkerClick={this.handleMarkerClick}
           center={this.state.center}
+          howManyHours={this.state.howManyHours}
         />
       </div>
     );

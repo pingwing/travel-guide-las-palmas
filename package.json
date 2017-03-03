@@ -111,6 +111,7 @@
     "lodash": "^4.16.2",
     "marker-clusterer-plus": "^2.1.4",
     "react-display-name": "^0.2.0",
+    "react-modal": "^1.7.1",
     "react-prop-types-element-of-type": "^2.2.0",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
