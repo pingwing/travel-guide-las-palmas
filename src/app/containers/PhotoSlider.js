@@ -26,17 +26,15 @@ class PhotoSlider extends Component {
       <div>
         <div className="row">
           <ul className='pagination photoSlider' style={{height: '10%', display: 'inline'}}>
-            <li><a href="#">«</a></li>
+            <li><a style={{marginLeft:'30px'}} href="#">«</a></li>
             {this.props.markers.map((marker) => {
               return <li><a href="#"><MiniPhoto click={this.onClick} imageUrl={marker.imageUrl}/></a></li>
             })}
-            <li><a href="#">»</a></li>
+            <li><a style={{float: 'right', marginRight: '30px'}} href="#">»</a></li>
           </ul>
         </div>
-        <div className="row">
-          <div className="container-bottom pull-left ">
+          <div className="row container-bottom">
             {photo}
-          </div>
         </div>
       </div>
     )
