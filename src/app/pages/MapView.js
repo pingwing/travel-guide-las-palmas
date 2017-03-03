@@ -12,6 +12,7 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  Circle,
 } from "../../lib";
 
 import {connect} from 'react-redux';
@@ -26,13 +27,14 @@ import {
  *
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
-const GettingStartedGoogleMap = withGoogleMap(props => (
+const GoogleMapsComponent = withGoogleMap(props => (
   <GoogleMap
     ref={props.onMapLoad}
     defaultZoom={13}
     defaultCenter={{lat: 28.114107, lng: -15.431281}}
     onClick={props.onMapClick}
   >
+    <Circle center={{lat: 28.114107, lng: -15.431281}} radius={1000}/>
     {props.markers.map(marker => (
       <Marker
         {...marker}
@@ -82,7 +84,7 @@ console.log(this.props.markers);
         <Helmet
           title="Travel Guide Las Palmas | React in Flip Flops"
         />
-        <GettingStartedGoogleMap
+        <GoogleMapsComponent
           containerElement={
             <div style={{height: `100%`}}/>
           }
