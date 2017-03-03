@@ -31,6 +31,12 @@ class RightContainer extends Component {
     console.log('currentMarker', currentMarkerObject);
     if (!currentMarkerObject) return null;
     return (
+
+    <div style={{position: 'absolute',
+      background: 'aqua',
+      height: '100%',
+      width: '200px',
+      right: '0px',}}>
       <div className="content">
         <LocationDetails>
           <label>Lat:<InputComponent value={currentMarkerObject.position.lat()} /></label>
@@ -39,6 +45,7 @@ class RightContainer extends Component {
           <label>Image URL:<InputComponent value={currentMarkerObject.imageUrl} onChange={this.editMarkerImageUrl} /></label>
         </LocationDetails>
       </div>
+    </div>
     )
   }
 }

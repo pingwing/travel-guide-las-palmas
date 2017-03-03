@@ -77,18 +77,12 @@ export default class Application extends Component {
 
           <div className="row full-height">
             <div className="col" style={{height: `100%`, padding: '0', width: '100%', float: 'left'}}>
-              <MapView toast={this.handleToast} />
+              <MapView toast={this.handleToast}/>
             </div>
-            <div style={{position: 'absolute',
-              background: 'aqua',
-              height: '100%',
-              width: '200px',
-              right: '0px',}}>
-              <RightContainer />
-            </div>
+            <RightContainer />
           </div>
         </div>
-        <div className="navbar navbar-default navbar-fixed-bottom" style={{height: "40%", margin:'auto'}}>
+        <div className="navbar navbar-default navbar-fixed-bottom" style={{height: "40%", margin: 'auto'}}>
           <PhotoSlider />
         </div>
       </div>
