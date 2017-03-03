@@ -12,6 +12,7 @@ const initialState = {
     description: '',
   }],
   currentMarker: '',
+  showNewMarkerPanel: true
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,7 +34,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         markers: nextMarkers,
-        currentMarker: newMarker.key
+        currentMarker: newMarker.key,
+        showNewMarkerPanel: true
       };
     case 'EDIT_MARKER_NAME':
       const editedMarkers = state.markers.map((marker) => {
@@ -46,11 +48,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         markers: editedMarkers,
+        showNewMarkerPanel: true
       };
     case 'SELECT_MARKER':
       return {
         ...state,
         currentMarker: action.key,
+        showNewMarkerPanel: true
       };
     case 'EDIT_MARKER_IMAGE_URL':
       const editedMarkersUrl = state.markers.map((marker) => {
@@ -63,12 +67,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         markers: editedMarkersUrl,
+        showNewMarkerPanel: true
       };      
     case 'DELETE_MARKER':
+      const filteredMarkers = state.markers.filter(function(marker) {
+          return marker.key === state.currentMarker ? false : true;
+      });
       return {
         ...state,
-        inputValue: action.text,
+        markers: filteredMarkers,
+        showNewMarkerPanel: false
       };
+    case 'SHOW_HIDE_NEW_MARKER_PANEL':
+      return {
+        ...state,
+        showNewMarkerPanel: !state.showNewMarkerPanel
+      }
     default:
       return state;
   }

@@ -7,7 +7,9 @@ import AddMarker from './AddMarker';
 import {connect} from 'react-redux';
 import {
   editMarkerName,
-  editMarkerImageUrl
+  editMarkerImageUrl,
+  showHideNewMarkerPanel,
+  deleteMarker
 } from '../actions';
 
 class RightContainer extends Component {
@@ -20,6 +22,14 @@ class RightContainer extends Component {
       this.props.dispatch(editMarkerImageUrl(evt.target.value));
   }  
 
+  showHideNewMarkerPanel = (evt) => {
+      this.props.dispatch(showHideNewMarkerPanel());
+  }
+
+  deleteMarker = (evt) => {
+      this.props.dispatch(deleteMarker());
+  }
+
   render() {
     console.log('RightContainer props',this.props);
     let currentMarkerObject;
@@ -29,9 +39,8 @@ class RightContainer extends Component {
       }
     })
     console.log('currentMarker', currentMarkerObject);
-    if (!currentMarkerObject) return null;
+    if (!currentMarkerObject || !this.props.showNewMarkerPanel) return null;
     return (
-
     <div style={{position: 'absolute',
       background: 'aqua',
       height: '100%',
@@ -43,6 +52,8 @@ class RightContainer extends Component {
           <label>Lng:<InputComponent value={currentMarkerObject.position.lng()} /></label>
           <label>Name:<InputComponent value={currentMarkerObject.name} onChange={this.editMarkerName} /></label>
           <label>Image URL:<InputComponent value={currentMarkerObject.imageUrl} onChange={this.editMarkerImageUrl} /></label>
+          <button onClick={this.showHideNewMarkerPanel}>Hide</button>
+          <button onClick={this.deleteMarker}>Delete</button>
         </LocationDetails>
       </div>
     </div>
@@ -53,7 +64,8 @@ class RightContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     markers: state.markers,
-    currentMarker: state.currentMarker
+    currentMarker: state.currentMarker,
+    showNewMarkerPanel: state.showNewMarkerPanel
   };
 };
 
