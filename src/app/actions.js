@@ -32,3 +32,9 @@ export const deleteMarker = (key) => {
     key,
   };
 }
+
+export const showHideNewMarkerPanel = () => {
+  return {
+    type: 'SHOW_HIDE_NEW_MARKER_PANEL'
+  };
+}
