@@ -17,22 +17,22 @@ import {
 class RightContainer extends Component {
 
   editMarkerName = (evt) => {
-      this.props.dispatch(editMarkerName(evt.target.value));
+    this.props.dispatch(editMarkerName(evt.target.value));
   }
   editMarkerDescription = (evt) => {
     this.props.dispatch(editMarkerDescription(evt.target.value));
   }
 
   editMarkerImageUrl = (evt) => {
-      this.props.dispatch(editMarkerImageUrl(evt.target.value));
-  }  
+    this.props.dispatch(editMarkerImageUrl(evt.target.value));
+  }
 
   showHideNewMarkerPanel = (evt) => {
-      this.props.dispatch(showHideNewMarkerPanel());
+    this.props.dispatch(showHideNewMarkerPanel());
   }
 
   deleteMarker = (evt) => {
-      this.props.dispatch(deleteMarker());
+    this.props.dispatch(deleteMarker());
   }
 
   handleOnMouseLeave = (evt) => {
@@ -40,7 +40,7 @@ class RightContainer extends Component {
   }
 
   render() {
-    console.log('RightContainer props',this.props);
+    console.log('RightContainer props', this.props);
     let currentMarkerObject;
     this.props.markers.forEach((marker) => {
       if (marker.key === this.props.currentMarker) {
@@ -50,23 +50,23 @@ class RightContainer extends Component {
     console.log('currentMarker', currentMarkerObject);
     if (!currentMarkerObject || !this.props.showNewMarkerPanel) return null;
     return (
-    <div onMouseLeave={this.handleOnMouseLeave} style={{position: 'absolute',
-      background: 'aqua',
+      <div onMouseLeave={this.handleOnMouseLeave} style={{position: 'absolute',
+      backgroundColor: 'rgba(0,100,100,0.2)',
       height: '100%',
       width: '200px',
       right: '0px',}}>
-      <div className="content">
-        <LocationDetails>
-          <label>Lat:<InputComponent value={currentMarkerObject.position.lat()} /></label>
-          <label>Lng:<InputComponent value={currentMarkerObject.position.lng()} /></label>
-          <label>Name:<InputComponent value={currentMarkerObject.name} onChange={this.editMarkerName} /></label>
-          <label>Description:<InputComponent value={currentMarkerObject.description} onChange={this.editMarkerDescription} /></label>
-          <label>Image URL:<InputComponent value={currentMarkerObject.imageUrl} onChange={this.editMarkerImageUrl} /></label>
-          <button onClick={this.showHideNewMarkerPanel}>Hide</button>
-          <button onClick={this.deleteMarker}>Delete</button>
-        </LocationDetails>
+        <div className="content">
+          <LocationDetails>
+            <label>Lat:<InputComponent value={currentMarkerObject.position.lat()}/></label>
+            <label>Lng:<InputComponent value={currentMarkerObject.position.lng()}/></label>
+            <label>Name:<InputComponent value={currentMarkerObject.name} onChange={this.editMarkerName}/></label>
+            <label>Description:<InputComponent value={currentMarkerObject.description} onChange={this.editMarkerDescription}/></label>
+            <label>Image URL:<InputComponent value={currentMarkerObject.imageUrl} onChange={this.editMarkerImageUrl}/></label>.
+            <button className="btn btn-warning hideRight" onClick={this.showHideNewMarkerPanel}>Hide</button>
+            <button className="btn btn-danger delete" onClick={this.deleteMarker}>Delete</button>
+          </LocationDetails>
+        </div>
       </div>
-    </div>
     )
   }
 }
