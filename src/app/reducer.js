@@ -56,8 +56,9 @@ const reducer = (state = initialState, action) => {
     case 'SELECT_MARKER':
       return {
         ...state,
+        style:{opacity:'.5'},
         currentMarker: action.key,
-        showNewMarkerPanel: true
+        showNewMarkerPanel: true,
       };
     case 'EDIT_MARKER_IMAGE_URL':
       const editedMarkersUrl = state.markers.map((marker) => {
