@@ -32,6 +32,9 @@ import {
   dataToJS
 } from 'react-redux-firebase'
 
+import Modal from 'react-modal';
+import InputComponent from '../containers/InputComponent';
+
 const geolocation = (
   canUseDOM && navigator.geolocation ?
     navigator.geolocation :
@@ -59,13 +62,28 @@ const GoogleMapsComponent = withGoogleMap(props => {
       markers.push(props.markers[key]);
   }
 
-  return (<GoogleMap
-    ref={props.onMapLoad}
-    defaultZoom={13}
-    center={props.center}
-    onClick={props.onMapClick}
+  const walkingRadius = ((parseFloat(props.howManyHours)-0.2)*7000)/2;
+  console.log('PINGWIN: walkingRadius', walkingRadius);
+
+  const humanIcon = `${process.env.PUBLIC_URL}/humanIcon.png`;
+  const circle = <Circle radius={walkingRadius} center={props.center} onClick={props.onMapClick}/>;
+  const marker = <Marker
+    position={props.center}
+    icon={humanIcon}
+  />;
+  //circle.bindTo('center', marker, 'position');  
+
+  return (
+    <GoogleMap
+      ref={props.onMapLoad}
+      defaultZoom={13}
+      center={props.center}
+      onClick={props.onMapClick}
   >
-    <Circle center={{lat: 28.114107, lng: -15.431281}} radius={1000}/>
+    
+    {marker}
+    {circle}
+
     { markers.map(marker => {
       return (
         <span>
@@ -83,6 +101,8 @@ class MapView extends Component {
   state = {
     center: {lat: 28.114107, lng: -15.431281},
     radius: 6000,
+    modalIsOpen: true,
+    howManyHours: '2',
   };
 
   isUnmounted = false;
@@ -124,7 +144,7 @@ class MapView extends Component {
     // }
   };
 
-  handleMarkerRightClick = (targetMarker) => {
+  handleMarkerClick = (targetMarker) => {
     /*
      * All you modify is data, and the view is driven by data.
      * This is so called data-driven-development. (And yes, it's now in
@@ -132,12 +152,13 @@ class MapView extends Component {
      */
     this.props.dispatch(selectMarker(targetMarker.key));
   };
+
   componentDidMount() {
     const tick = () => {
       if (this.isUnmounted) {
         return;
       }
-      this.setState({ radius: Math.max(this.state.radius - 20, 0) });
+      this.setState({radius: Math.max(this.state.radius - 20, 0)});
 
       if (this.state.radius > 200) {
         raf(tick);
@@ -166,12 +187,58 @@ class MapView extends Component {
       });
     });
   }
+
+  closeModal = () => {
+    this.setState({modalIsOpen: false});
+  }
+
+  editMarkerDescription = (evt) => {
+    this.setState({howManyHours: evt.target.value});
+  };
+
   render() {
+    const customModalStyles = {overlay : {
+      position          : 'fixed',
+      top               : 0,
+      left              : 0,
+      right             : 0,
+      bottom            : 0,
+      backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+    },
+      content : {
+        position                   : 'absolute',
+        top                        : '300px',
+        left                       : '300px',
+        right                      : '300px',
+        bottom                     : '300px',
+        border                     : '1px solid #ccc',
+        background                 : '#fff',
+        overflow                   : 'auto',
+        WebkitOverflowScrolling    : 'touch',
+        borderRadius               : '4px',
+        outline                    : 'none',
+        padding                    : '20px'
+
+      }};
     return (
       <div style={{height: `100%`}}>
         <Helmet
           title="Travel Guide Las Palmas | React in Flip Flops"
         />
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          contentLabel="Hello Modal"
+          style={customModalStyles}
+        >
+          <div className="row">
+            <h2 style={{display:'inline'}} ref="subtitle">Hello traveller!</h2>
+          </div>
+          <p style={{display:'inline'}}>How much time do you have? </p>
+          <InputComponent style={{display:'inline'}} value={this.state.howManyHours} onChange={this.editMarkerDescription}/>
+          <p style={{display:'inline'}}> hours</p>
+          <button className="btn btn-success" onClick={this.closeModal}>Start EXPLORING!</button>
+        </Modal>
         <GoogleMapsComponent
           containerElement={
             <div style={{height: `100%`}}/>
@@ -182,8 +249,9 @@ class MapView extends Component {
           onMapLoad={this.handleMapLoad}
           onMapClick={this.handleMapClick}
           markers={this.props.markers}
-          onMarkerClick={this.handleMarkerRightClick}
+          onMarkerClick={this.handleMarkerClick}
           center={this.state.center}
+          howManyHours={this.state.howManyHours}
         />
       </div>
     );

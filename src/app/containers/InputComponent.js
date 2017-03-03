@@ -9,7 +9,7 @@ export default class InputComponent extends Component {
     const {onChange} = this.props;
     return (
       <form>
-        <input className="input" type="text" readOnly={readOnly} value={value} onChange={onChange}/>
+        <input className="input modalInput" type="text" readOnly={readOnly} value={value} onChange={onChange}/>
       </form>
     )
   }
