@@ -37,3 +37,9 @@ export const showHideNewMarkerPanel = () => {
     type: 'SHOW_HIDE_NEW_MARKER_PANEL'
   };
 }
+
+export const hideNewMarkerPanel = () => {
+  return {
+    type: 'HIDE_NEW_MARKER_PANEL'
+  };
+}

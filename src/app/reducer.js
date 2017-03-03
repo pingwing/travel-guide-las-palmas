@@ -83,6 +83,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         showNewMarkerPanel: !state.showNewMarkerPanel
       }
+    case 'HIDE_NEW_MARKER_PANEL':
+      return {
+        ...state,
+        showNewMarkerPanel: false
+      }      
     default:
       return state;
   }

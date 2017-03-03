@@ -9,7 +9,8 @@ import {
   editMarkerName,
   editMarkerImageUrl,
   showHideNewMarkerPanel,
-  deleteMarker
+  deleteMarker,
+  hideNewMarkerPanel
 } from '../actions';
 
 class RightContainer extends Component {
@@ -30,6 +31,10 @@ class RightContainer extends Component {
       this.props.dispatch(deleteMarker());
   }
 
+  handleOnMouseLeave = (evt) => {
+    this.props.dispatch(hideNewMarkerPanel());
+  }
+
   render() {
     console.log('RightContainer props',this.props);
     let currentMarkerObject;
@@ -41,7 +46,7 @@ class RightContainer extends Component {
     console.log('currentMarker', currentMarkerObject);
     if (!currentMarkerObject || !this.props.showNewMarkerPanel) return null;
     return (
-    <div style={{position: 'absolute',
+    <div onMouseLeave={this.handleOnMouseLeave} style={{position: 'absolute',
       background: 'aqua',
       height: '100%',
       width: '200px',
