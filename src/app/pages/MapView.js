@@ -36,7 +36,7 @@ const GettingStartedGoogleMap = withGoogleMap(props => (
     {props.markers.map(marker => (
       <Marker
         {...marker}
-        onRightClick={() => props.onMarkerRightClick(marker)}
+        onClick={() => props.onMarkerClick(marker)}
       />
     ))}
   </GoogleMap>
@@ -92,7 +92,7 @@ console.log(this.props.markers);
           onMapLoad={this.handleMapLoad}
           onMapClick={this.handleMapClick}
           markers={this.props.markers}
-          onMarkerRightClick={this.handleMarkerRightClick}
+          onMarkerClick={this.handleMarkerRightClick}
         />
       </div>
     );
