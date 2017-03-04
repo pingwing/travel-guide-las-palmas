@@ -52,11 +52,14 @@ const GoogleMapsComponent = withGoogleMap(props => {
 
   //console.log(props);
 
-  if (!isLoaded(props.markers) || isEmpty(props.markers)) return null;
-
   let markers = [];
-  for (const key of Object.keys(props.markers)) {
-      markers.push(props.markers[key]);
+
+  if (!isLoaded(props.markers) || isEmpty(props.markers)) {
+    return null;
+  } else {
+    for (const key of Object.keys(props.markers)) {
+        markers.push(props.markers[key]);
+    }
   }
 
   return (<GoogleMap
@@ -132,6 +135,22 @@ class MapView extends Component {
      */
     this.props.dispatch(selectMarker(targetMarker.key));
   };
+
+  // componentWillMount() {
+  //   const position = {lat: '28.1551076', lng: '-15.4316226'};
+  //   const newMarker = {
+  //     position,
+  //     defaultAnimation: 2,
+  //     key: Date.now().toString(),
+  //     name: '',
+  //     imageUrl: 'https://media.giphy.com/media/3o6Zti9NTwp5OEJHEc/giphy.gif',
+  //     description: '',
+  //   };
+
+  //   const { firebase } = this.props;
+  //   firebase.push('/markers', newMarker);     
+  // }
+
   componentDidMount() {
     const tick = () => {
       if (this.isUnmounted) {
@@ -166,6 +185,7 @@ class MapView extends Component {
       });
     });
   }
+
   render() {
     return (
       <div style={{height: `100%`}}>
