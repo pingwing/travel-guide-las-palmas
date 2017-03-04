@@ -10,7 +10,7 @@ export default class Support extends Component {
   render() {
     return (
       <form onSubmit={this.askUltimateQuestion}>
-      <input type="text" placeholder="ask us anything" />
+      <input type="text" className="support" placeholder="ask us anything" />
       </form>
     )
   }}

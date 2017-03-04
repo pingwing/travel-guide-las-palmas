@@ -15,12 +15,24 @@ label {
 }
 
 div.container-botton {
+}
 
+img.photo {
+  height: 34px;
 }
 
 input {
   border: none;
   border-radius: 5px;
+}
+
+input.modalInput {
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+input.support {
+  margin: 5px;
 }
 
 button {
@@ -45,4 +57,3 @@ html, body, #root, .full-height {
     transform: rotate(359deg);
   }
 }
-

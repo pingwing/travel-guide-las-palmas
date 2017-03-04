@@ -1,5 +1,5 @@
 {
-  "name": "react-google-maps",
+  "name": "travel-guide-las-palmas",
   "version": "6.0.1",
   "description": "React.js Google Maps integration component",
   "main": "lib/index.js",
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomchentw/react-google-maps"
+    "url": "https://github.com/pingwing/travel-guide-las-palmas"
   },
   "keywords": [
     "React.js",
@@ -62,9 +62,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tomchentw/react-google-maps/issues"
+    "url": "https://github.com/pingwing/travel-guide-las-palmas/issues"
   },
-  "homepage": "https://tomchentw.github.io/react-google-maps/",
+  "homepage": "https://travel-guide-las-palmas.online/",
   "devDependencies": {
     "babel-cli": "^6.16.0",
     "babel-core": "^6.16.0",
@@ -111,6 +111,7 @@
     "lodash": "^4.16.2",
     "marker-clusterer-plus": "^2.1.4",
     "react-display-name": "^0.2.0",
+    "react-modal": "^1.7.1",
     "react-prop-types-element-of-type": "^2.2.0",
     "react-redux": "^5.0.3",
     "react-redux-firebase": "^1.3.0",

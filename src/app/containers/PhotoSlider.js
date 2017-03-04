@@ -45,8 +45,12 @@ class PhotoSlider extends Component {
         <div className="row">
           <ul className='pagination photoSlider' style={{height: '10%', display: 'inline'}}>
             <li><a style={{marginLeft:'30px'}} href="#">«</a></li>
-            { !isLoaded(markers) || isEmpty(markers) ? '' : markers.map((marker) => {
-              return <li><a href="#"><MiniPhoto click={this.onClick} imageUrl={marker.imageUrl} markerKey={marker.key}/></a></li>
+            {markers.map((marker) => {
+              let style = {};
+              if (marker.key === this.props.currentMarker) {
+                style = {opacity:'.5'}
+              }
+              return <li><MiniPhoto click={this.onClick} imageUrl={marker.imageUrl} style={style} markerKey={marker.key}/></li>
             })}
             <li><a style={{float: 'right', marginRight: '30px'}} href="#">»</a></li>
           </ul>

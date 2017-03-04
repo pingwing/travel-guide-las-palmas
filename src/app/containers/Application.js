@@ -39,6 +39,7 @@ import {
 import Helmet from "react-helmet";
 import RightContainer from './RightContainer';
 import PhotoSlider from './PhotoSlider';
+import Support from './Support';
 export default class Application extends Component {
 
   handleToast = this.handleToast.bind(this);
@@ -67,11 +68,6 @@ export default class Application extends Component {
               <Link to="/">Travel Guide Las Palmas</Link>
             </Navbar.Brand>
           </Navbar.Header>
-          <Nav>
-            <NavDropdown id="examples-dropdown" title="Options">
-              <LinkContainer to="/basics/pop-up-window"><MenuItem>Insert new place</MenuItem></LinkContainer>
-            </NavDropdown>
-          </Nav>
         </Navbar>
         <div className="container-fluid full-height" style={{height: "56.4%",}}>
 
