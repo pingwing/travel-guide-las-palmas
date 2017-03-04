@@ -34,10 +34,11 @@ class PhotoSlider extends Component {
     });
 
     if (!currentMarkerObject) {
-      currentMarkerObject = null;
-    } else {
       currentMarkerObject =  markers[0];
     }
+
+    console.log('Current marker', this.props.currentMarker, currentMarkerObject);
+
     const photo = currentMarkerObject ? <Photo currentMarker={currentMarkerObject}/> : null;
     
     return (
