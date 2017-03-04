@@ -11,9 +11,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducer';
 import configureStore from './store'
-//import localReducer from './localReducer';
-
-//const store = createStore(localReducer);
 
 const initialState = window.__INITIAL_STATE__ || {firebase: { authError: null }}
 

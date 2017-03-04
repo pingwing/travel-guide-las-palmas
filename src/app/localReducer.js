@@ -1,4 +1,3 @@
-// The todo items
 const initialState = {
   markers: [],
   currentMarker: '',

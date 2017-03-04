@@ -52,9 +52,6 @@ const geolocation = (
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
 const GoogleMapsComponent = withGoogleMap(props => {
-
-  //console.log(props);
-
   let markers = [];
 
   if (!isLoaded(props.markers) || isEmpty(props.markers)) {
@@ -66,14 +63,13 @@ const GoogleMapsComponent = withGoogleMap(props => {
   }
 
   const walkingRadius = ((parseFloat(props.howManyHours)-0.2)*7000)/2;
-  console.log('PINGWIN: walkingRadius', walkingRadius);
-
   const humanIcon = `${process.env.PUBLIC_URL}/humanIcon.png`;
   const circle = <Circle radius={walkingRadius} center={props.center} onClick={props.onMapClick}/>;
   const marker = <Marker
     position={props.center}
     icon={humanIcon}
   />;
+
   //circle.bindTo('center', marker, 'position');  
 
   return (
@@ -133,18 +129,7 @@ class MapView extends Component {
       description: '',
     };    
 
-    console.log(newMarker);
-
-    firebase.push('/markers', newMarker)
-
-    //this.props.dispatch(addMarker(position));
-
-    // if (nextMarkers.length === 3) {
-    //   this.props.toast(
-    //     `Right click on the marker to remove it`,
-    //     `Also check the code!`
-    //   );
-    // }
+    firebase.push('/markers', newMarker);
   };
 
   handleMarkerClick = (targetMarker) => {
@@ -155,21 +140,6 @@ class MapView extends Component {
      */
     this.props.dispatch(selectMarker(targetMarker.key));
   };
-
-  // componentWillMount() {
-  //   const position = {lat: '28.1551076', lng: '-15.4316226'};
-  //   const newMarker = {
-  //     position,
-  //     defaultAnimation: 2,
-  //     key: Date.now().toString(),
-  //     name: '',
-  //     imageUrl: 'https://media.giphy.com/media/3o6Zti9NTwp5OEJHEc/giphy.gif',
-  //     description: '',
-  //   };
-
-  //   const { firebase } = this.props;
-  //   firebase.push('/markers', newMarker);     
-  // }
 
   componentDidMount() {
     const tick = () => {
@@ -275,14 +245,6 @@ class MapView extends Component {
     );
   }
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     markers: state.markers,
-//   };
-// };
-
-// export default connect(mapStateToProps)(MapView);
 
 const fbWrappedMapView = firebaseConnect([
   '/todos',

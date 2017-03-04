@@ -63,15 +63,6 @@ class PhotoSlider extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     markers: state.markers,
-//     currentMarker: state.currentMarker
-//   };
-// };
-
-// export default connect(mapStateToProps)(PhotoSlider);
-
 const fbWrappedPhotoSlider = firebaseConnect([
   '/todos',
   '/markers',

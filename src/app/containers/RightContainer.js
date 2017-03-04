@@ -87,23 +87,12 @@ class RightContainer extends Component {
         markers.push(this.props.markers[key]);
     }    
 
-    //console.log('RigthContainer::markers: ', markers);
-
     let currentMarkerObject;
     markers.forEach((marker) => {
       if (marker.key === this.props.currentMarker) {
         currentMarkerObject = marker;
       }
     });              
-
-    //console.log('RigthContainer::currentMarker: ', this.props.currentMarker);    
-    //console.log('RigthContainer::currentMarkerObject: ', currentMarkerObject);
-
-    // this.props.markers.forEach((marker) => {
-    //   if (marker.key === this.props.currentMarker) {
-    //     currentMarkerObject = marker;
-    //   }
-    // })
 
     if (!currentMarkerObject || !this.props.showNewMarkerPanel) return null;
     return (
@@ -127,16 +116,6 @@ class RightContainer extends Component {
     )
   }
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     markers: state.markers,
-//     currentMarker: state.currentMarker,
-//     showNewMarkerPanel: state.showNewMarkerPanel
-//   };
-// };
-
-// export default connect(mapStateToProps)(RightContainer);
 
 const fbWrappedRightContainer = firebaseConnect([
   '/todos',
