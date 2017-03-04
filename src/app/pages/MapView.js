@@ -17,7 +17,6 @@ import {
 
 import {connect} from 'react-redux';
 import {
-  addMarker,
   selectMarker,
 } from '../actions';
 

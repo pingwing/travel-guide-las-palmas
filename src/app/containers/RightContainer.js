@@ -2,15 +2,9 @@ import React from 'react';
 import {Component} from 'react';
 import InputComponent from './InputComponent';
 import LocationDetails from './LocationDetails';
-import Photo from './Photo';
-import AddMarker from './AddMarker';
 import {connect} from 'react-redux';
 import {
-  editMarkerName,
-  editMarkerImageUrl,
   showHideNewMarkerPanel,
-  editMarkerDescription,
-  deleteMarker,
   hideNewMarkerPanel
 } from '../actions';
 import {

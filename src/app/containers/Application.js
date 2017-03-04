@@ -1,8 +1,6 @@
 import {
   default as React,
   Component,
-  PropTypes,
-  Children,
 } from "react";
 
 import {
@@ -11,35 +9,15 @@ import {
 
 import {
   Navbar,
-  Nav,
-  NavItem,
-  NavDropdown,
-  MenuItem,
 } from "react-bootstrap";
-
-import {
-  LinkContainer,
-} from "react-router-bootstrap";
 
 import {
   MapView,
 } from "../pages";
 
-import GitHubForkRibbon from "react-github-fork-ribbon";
-
-import {
-  ToastContainer,
-  ToastMessage,
-} from "react-toastr";
-
-import {
-  PrismCode,
-} from "react-prism";
-
 import Helmet from "react-helmet";
 import RightContainer from './RightContainer';
 import PhotoSlider from './PhotoSlider';
-import Support from './Support';
 export default class Application extends Component {
 
   handleToast = this.handleToast.bind(this);
